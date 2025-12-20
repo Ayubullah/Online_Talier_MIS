@@ -10,6 +10,112 @@
             body { margin: 0; padding: 0; }
             .no-print { display: none; }
             .page-break { page-break-before: always; }
+            
+            /* Ensure barcodes are visible when printing */
+            img[alt*="barcode"],
+            img[alt*="Barcode"],
+            svg,
+            canvas {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Ensure barcode containers are visible */
+            div[style*="barcode"],
+            div[style*="Barcode"],
+            th[colspan="2"],
+            td[colspan="2"] {
+                display: block !important;
+                visibility: visible !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Force print background colors and images */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+        
+        /* Ensure barcodes are visible on screen */
+        img[alt*="barcode"],
+        img[alt*="Barcode"],
+        svg {
+            display: inline-block !important;
+            visibility: visible !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            height: auto !important;
+        }
+        
+        /* Barcode specific styles */
+        .barcode-container {
+            display: block !important;
+            visibility: visible !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+        
+        /* Ensure barcode images are properly sized and visible */
+        .barcode-container img,
+        .barcode-container svg {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: auto !important;
+            display: block !important;
+            margin: 0 auto !important;
+        }
+        
+        /* Force barcode to take full width */
+        .barcode-container img[alt*="barcode"],
+        .barcode-container svg {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Side by side barcode layout */
+        tr td[colspan='2'].barcode-container {
+            display: table-cell !important;
+            width: 50% !important;
+        }
+        
+        /* Ensure barcode row displays horizontally */
+        table tr.barcode-row,
+        table tr[style*="table-row"] {
+            display: table-row !important;
+        }
+        
+        table tr.barcode-row td,
+        table tr[style*="table-row"] td {
+            display: table-cell !important;
+            width: 50% !important;
+        }
+        
+        @media print {
+            tr td[colspan='2'].barcode-container {
+                display: table-cell !important;
+                width: 50% !important;
+                page-break-inside: avoid !important;
+            }
+            
+            table tr.barcode-row,
+            table tr[style*="table-row"] {
+                display: table-row !important;
+            }
+            
+            table tr.barcode-row td,
+            table tr[style*="table-row"] td {
+                display: table-cell !important;
+                width: 50% !important;
+            }
         }
 
         .Inc_table {
@@ -130,43 +236,43 @@
                         </p>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan='2' class='text-center' style='border-bottom: 3px dashed black;border-right:1px solid white;'>
-                        <!-- Customer Phone Barcode -->
-                        <div style="height: 60px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                <tr style="display: table-row !important;">
+                    <!-- Customer Phone Barcode - Left side -->
+                    <td colspan='2' class='text-center barcode-container' style='border: none !important; border-left: none !important; border-right: 1px solid black !important; border-top: none !important; border-bottom: none !important; width: 50% !important; display: table-cell !important; vertical-align: middle; padding: 5px; margin: 0; background: #f0f0f0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;'>
+                        <div class="barcode-container" style="height: 60px; display: flex !important; align-items: center !important; justify-content: center !important; flex-direction: column; visibility: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; width: 100%; margin: 0; padding: 0;">
                             @if($vest->customer && $vest->customer->phone && $vest->customer->phone->pho_no)
                                 @php
                                     try {
                                         $barcode = new \Milon\Barcode\DNS1D();
-                                        // Display barcode with integrated text
-                                        echo $barcode->getBarcodeHTML($vest->customer->phone->pho_no, 'C128', 1.5, 30, 'black', true);
+                                        // Display barcode with integrated text, full width
+                                        echo $barcode->getBarcodeHTML((string)$vest->customer->phone->pho_no, 'C128', 2.5, 35, 'black', true);
                                     } catch (\Exception $e) {
-                                        echo '<div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>';
-                                        echo '<p style="margin-top: 5px; font-size: 12px; text-align: center;">{{ $vest->customer->phone->pho_no }}</p>';
+                                        echo '<div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>';
+                                        echo '<p style="margin-top: 5px; font-size: 12px; text-align: center;">' . htmlspecialchars($vest->customer->phone->pho_no) . '</p>';
                                     }
                                 @endphp
                             @else
-                                <div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>
+                                <div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>
                                 <p style="margin-top: 5px; font-size: 12px; text-align: center;">N/A</p>
                             @endif
                         </div>
                     </td>
-                    <td colspan='2' class='text-center p-5' style='border-bottom: 3px dashed black;'>
-                        <!-- Vest ID Barcode -->
-                        <div style="height: 60px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <!-- Vest ID Barcode - Right side -->
+                    <td colspan='2' class='text-center barcode-container' style='border: none !important; border-left: none !important; border-right: none !important; border-top: none !important; border-bottom: none !important; width: 50% !important; display: table-cell !important; vertical-align: middle; padding: 5px; margin: 0; background: #f0f0f0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;'>
+                        <div class="barcode-container" style="height: 60px; display: flex !important; align-items: center !important; justify-content: center !important; flex-direction: column; visibility: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; width: 100%; margin: 0; padding: 0;">
                             @if($vest->V_M_ID)
                                 @php
                                     try {
                                         $barcode = new \Milon\Barcode\DNS1D();
-                                        // Display barcode with integrated text
-                                        echo $barcode->getBarcodeHTML($vest->V_M_ID, 'C128', 1.5, 30, 'black', true);
+                                        // Display barcode with integrated text, full width
+                                        echo $barcode->getBarcodeHTML((string)$vest->V_M_ID, 'C128', 2.5, 35, 'black', true);
                                     } catch (\Exception $e) {
-                                        echo '<div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>';
-                                        echo '<p style="margin-top: 5px; font-size: 12px; text-align: center;">{{ $vest->V_M_ID }}</p>';
+                                        echo '<div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>';
+                                        echo '<p style="margin-top: 5px; font-size: 12px; text-align: center;">' . htmlspecialchars($vest->V_M_ID) . '</p>';
                                     }
                                 @endphp
                             @else
-                                <div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>
+                                <div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>
                                 <p style="margin-top: 5px; font-size: 12px; text-align: center;">N/A</p>
                             @endif
                         </div>
@@ -176,14 +282,18 @@
                     <td colspan="4" class="text-end font-monospace">
                         <span>
                             @if($vest->O_date && $vest->R_date)
-                                {{ $vest->O_date }}--{{ $vest->R_date }}
-                                -->
+                                {{ $vest->O_date }}--
+                                {{ $vest->R_date }}
                                 @php
-                                    $orderDate = \Carbon\Carbon::parse($vest->O_date);
-                                    $receiveDate = \Carbon\Carbon::parse($vest->R_date);
-                                    $daysDiff = $orderDate->diffInDays($receiveDate);
+                                    try {
+                                        $date1 = new DateTime($vest->O_date);
+                                        $date2 = new DateTime($vest->R_date);
+                                        $interval = $date1->diff($date2);
+                                        echo "--> " . $interval->format('%a days');
+                                    } catch (\Exception $e) {
+                                        echo "--> 0 days";
+                                    }
                                 @endphp
-                                {{ $daysDiff }} days
                             @else
                                 {{ $vest->O_date ?? 'N/A' }}--{{ $vest->R_date ?? 'N/A' }}
                             @endif

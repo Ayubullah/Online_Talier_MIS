@@ -10,6 +10,48 @@
             .d-print-none { display: none !important; }
             body { font-size: 14px; }
             .table { page-break-inside: avoid; }
+            
+            /* Ensure barcodes are visible when printing */
+            img[alt*="barcode"],
+            img[alt*="Barcode"],
+            svg,
+            canvas {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Ensure barcode containers are visible */
+            div[style*="barcode"],
+            div[style*="Barcode"],
+            th[colspan="2"],
+            td[colspan="2"] {
+                display: block !important;
+                visibility: visible !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Force print background colors and images */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
+        
+        /* Ensure barcodes are visible on screen */
+        img[alt*="barcode"],
+        img[alt*="Barcode"],
+        svg {
+            display: inline-block !important;
+            visibility: visible !important;
+            max-width: 100% !important;
+            height: auto !important;
         }
         
         .Inc_table1 { 
@@ -43,6 +85,69 @@
         
         .font-17 {
             font-size: 17px;
+        }
+        
+        /* Barcode specific styles */
+        .barcode-container {
+            display: block !important;
+            visibility: visible !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+        
+        /* Ensure barcode images are properly sized and visible */
+        .barcode-container img,
+        .barcode-container svg {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: auto !important;
+            display: block !important;
+            margin: 0 auto !important;
+        }
+        
+        /* Force barcode to take full width */
+        .barcode-container img[alt*="barcode"],
+        .barcode-container svg {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Side by side barcode layout */
+        tr td[colspan='2'].barcode-container {
+            display: table-cell !important;
+            width: 50% !important;
+        }
+        
+        /* Ensure barcode row displays horizontally */
+        table tr.barcode-row,
+        table tr[style*="table-row"] {
+            display: table-row !important;
+        }
+        
+        table tr.barcode-row td,
+        table tr[style*="table-row"] td {
+            display: table-cell !important;
+            width: 50% !important;
+        }
+        
+        @media print {
+            tr td[colspan='2'].barcode-container {
+                display: table-cell !important;
+                width: 50% !important;
+                page-break-inside: avoid !important;
+            }
+            
+            table tr.barcode-row,
+            table tr[style*="table-row"] {
+                display: table-row !important;
+            }
+            
+            table tr.barcode-row td,
+            table tr[style*="table-row"] td {
+                display: table-cell !important;
+                width: 50% !important;
+            }
         }
     </style>
 </head>
@@ -82,12 +187,15 @@
 
                             <!-- Invoice Detail-->
                             <div class="row">
-                                <div class="col-6"></div>
+                                <div class="col-6">
+                                    <!-- <img src="barcode.png" alt="" srcset=""> -->
+                                </div>
+                                <!-- end col -->
                                 <div class="col-4">
                                     <div class="">
                                         <!-- Invoice info will be here -->
                                     </div>
-                                </div>
+                                </div><!-- end col -->
                             </div>
                             <!-- Invoice Detail-->
 
@@ -97,14 +205,22 @@
                                         <table class="table-bordered w-100">
                                             <thead class="">
                                                 <tr>
-                                                    <th colspan="6">
+                                                    <th colspan="7">
                                                         <strong>Date :</strong> {{ $invoice->inc_date }}&nbsp;&nbsp;&nbsp;&nbsp;
                                                         <strong>ID :</strong> {{ $invoiceId }}
                                                     </th>
-                                                    <th colspan="2" class="text-center">
-                                                        <!-- Barcode placeholder -->
-                                                        <div style="height: 50px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
-                                                            Barcode: {{ $invoiceId }}
+                                                    <th colspan="3" class="text-center barcode-container" style="padding: 5px; border: none !important; border-left: none !important; border-right: none !important; border-top: none !important; border-bottom: none !important; width: 100%; background: #f0f0f0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;">
+                                                        <!-- Invoice ID Barcode - Full width -->
+                                                        <div class="barcode-container" style="display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; visibility: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0; padding: 0;">
+                                                            @php
+                                                                try {
+                                                                    $barcode = new \Milon\Barcode\DNS1D();
+                                                                    // Display barcode with integrated text, full width
+                                                                    echo $barcode->getBarcodeHTML((string)$invoiceId, 'C128', 3, 40, 'black', true);
+                                                                } catch (\Exception $e) {
+                                                                    echo '<div style="height: 50px; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;">Barcode: ' . htmlspecialchars($invoiceId) . '</div>';
+                                                                }
+                                                            @endphp
                                                         </div>
                                                     </th>
                                                 </tr>
@@ -120,9 +236,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($vests as $index => $vest)
+                                                @php
+                                                    $num = 0;
+                                                @endphp
+                                                @foreach($vests as $vest)
+                                                @php
+                                                    $num += 1;
+                                                @endphp
                                                 <tr>
-                                                    <td class="text-black">{{ $index + 1 }}</td>
+                                                    <td class="text-black">{{ $num }}</td>
                                                     <td class="text-black">{{ $vest->V_M_ID }}</td>
                                                     <td class="text-black">{{ $vest->customer->cus_name }}</td>
                                                     <td class="text-black">{{ $vest->customer->phone->pho_no ?? 'N/A' }}</td>
@@ -134,12 +256,12 @@
                                                 @endforeach
                                                 
                                                 @php
-                                                    $currentRows = $vests->count();
-                                                    $totalRows = 20;
-                                                    $remainingRows = $totalRows - $currentRows;
+                                                    $send = $num;
+                                                    $totalRows = 20; // Total number of rows you want to echo
+                                                    $remainingRows = $totalRows - $send; // Calculate how many more rows to echo
                                                 @endphp
                                                 
-                                                @for($i = $currentRows + 1; $i <= $totalRows; $i++)
+                                                @for($i = $send + 1; $i <= $remainingRows + $send; $i++)
                                                 <tr>
                                                     <td>{{ $i }}</td>
                                                     <td></td>
@@ -200,15 +322,18 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="col-sm-12">
-                                        <img src="{{ asset('image/logo.jpg') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
-                                        <h1 style="font-family:'Times New Roman', Times, serif;" class="text-center"><b>شاهید خیاطی و رخت فروشی</b></h1>
-                                        <p class="font-17 text-black fw-bold text-center m-0" style="font-family:'Times New Roman', Times, serif;">
-                                            <span class="ri-whatsapp-line"></span><strong> +93784444247 </strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span class="ri-phone-line"></span><strong>+93767958501</strong>&nbsp;&nbsp;&nbsp;: شماره تماس
-                                        </p>
-                                        <p class="font-17 text-black fw-bold text-end m-0" style="font-family:'Times New Roman', Times, serif;">
-                                            <strong> آدرس : ارزان قیمت چهاراهی محبس احمدزی مارکیت دوکان نمبر ۳ ، ۴ و ۵ </strong>
-                                        </p>
+                                        <div class="mt-1 text-black fw-bold">
+                                            <img src="{{ asset('image/logo.jpg') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
+                                            <h1 style="font-family:'Times New Roman', Times, serif;" class="text-center"><b>شاهید خیاطی و رخت فروشی</b></h1>
+                                            <p class="font-17 text-black fw-bold text-center m-0" style="font-family:'Times New Roman', Times, serif;">
+                                                <span class="ri-whatsapp-line"></span><strong> +93784444247 </strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span class="ri-phone-line"></span><strong>+93767958501</strong>&nbsp;&nbsp;&nbsp;: شماره تماس
+                                            </p>
+                                            <p class="font-17 text-black fw-bold text-end m-0" style="font-family:'Times New Roman', Times, serif;">
+                                                <strong> آدرس : ارزان قیمت چهاراهی محبس احمدزی مارکیت دوکان نمبر ۳ ، ۴ و ۵ </strong>
+                                            </p>
+                                            <!-- <p class="text-black font-13"><span>0093 784444247 : الیاس شاهد </span> : 767645757 0093 | <span>خالد شاهد </span></p> -->
+                                        </div>
                                     </div>
 
                                     <!-- Vest Measurement Table -->
@@ -223,54 +348,54 @@
                                             <td>شماره</td>
                                         </tr>
                                         <tr class="text-center">
-                                            <td class="Inc_table1">{{ $vest->Waist ?? '0' }}</td>
-                                            <td>کمر</td>
+                                            <td class="Inc_table1">0</td>
+                                            <td>خالی</td>
                                             <td class="Inc_table1">{{ $vest->V_M_ID }}</td>
                                             <td>ID</td>
                                         </tr>
                                         <tr class="text-center">
+                                            <td class="Inc_table1">0</td>
+                                            <td>خالی</td>
                                             <td class="Inc_table1">{{ $vest->Vest_Type ?? '0' }}</td>
                                             <td>ډول</td>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <td class="Inc_table" colspan="2">فرمایش واسکت</td>
                                             <td class="Inc_table1">{{ $vest->size }}</td>
                                             <td>نوع لباس</td>
                                         </tr>
                                         <tr class="text-center">
-                                            <td class="Inc_table" colspan="2">فرمایش واسکت</td>
-                                            <td class="Inc_table1">{{ $vest->Height }}</td>
+                                            <td class="Inc_table">{{ $vest->Shana ?? '' }}</td>
+                                            <td class="Inc_table">نوع شانه</td>
+                                            <td class="Inc_table1">{{ $vest->Height ?? '' }}</td>
                                             <td>قد</td>
                                         </tr>
                                         <tr class="text-center">
-                                            <td class="Inc_table">{{ $vest->Shana }}</td>
-                                            <td class="Inc_table">نوع شانه</td>
-                                            <td class="Inc_table1">{{ $vest->Shoulder }}</td>
+                                            <td class="Inc_table">{{ $vest->Kalar ?? '' }}</td>
+                                            <td class="Inc_table">انواع کالر</td>
+                                            <td class="Inc_table1">{{ $vest->Shoulder ?? '' }}</td>
                                             <td>شانه</td>
                                         </tr>
                                         <tr class="text-center">
-                                            <td class="Inc_table">{{ $vest->Kalar }}</td>
-                                            <td class="Inc_table">انواع کالر</td>
-                                            <td class="Inc_table1">{{ $vest->Armpit }}</td>
+                                            <td class="Inc_table">{{ $vest->Daman ?? '' }}</td>
+                                            <td class="Inc_table">انواع دامن</td>
+                                            <td class="Inc_table1">{{ $vest->Armpit ?? '' }}</td>
                                             <td>بغل</td>
                                         </tr>
                                         <tr class="text-center">
-                                            <td class="Inc_table">{{ $vest->Daman }}</td>
-                                            <td class="Inc_table">انواع دامن</td>
-                                            <td class="Inc_table1">{{ $vest->Waist }}</td>
+                                            <td class="Inc_table">{{ $vest->NawaWaskat ?? '' }}</td>
+                                            <td class="Inc_table">انواع واسکت</td>
+                                            <td class="Inc_table1">{{ $vest->Waist ?? '' }}</td>
                                             <td>کمر</td>
                                         </tr>
                                         <tr class="text-center">
-                                            <td class="Inc_table">{{ $vest->NawaWaskat }}</td>
-                                            <td class="Inc_table">انواع واسکت</td>
-                                            <td class="Inc_table1">0</td>
-                                            <td>خالی</td>
+                                            <td class="Inc_table">{{ $vest->Daman ?? '' }}</td>
+                                            <td class="Inc_table">انواع دامن</td>
+                                            <td class="Inc_table1">{{ $vest->Armpit ?? '' }}</td>
+                                            <td>بغل</td>
                                         </tr>
                                         <tr class="text-center">
-                                            <td class="Inc_table">0</td>
-                                            <td class="Inc_table">خالی</td>
-                                            <td class="Inc_table1">0</td>
-                                            <td>خالی</td>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <td class="Inc_table">0</td>
+                                            <td class="Inc_table" style="">0</td>
                                             <td class="Inc_table">خالی</td>
                                             <td class="Inc_table1">0</td>
                                             <td>خالی</td>
@@ -284,55 +409,63 @@
                                                 </p>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan='2' class='text-center' style='border-bottom: 3px dashed black;border-right:1px solid white;'>
-                                                <!-- Customer Phone Barcode -->
-                                                <div style="height: 60px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                        <tr style="display: table-row !important;">
+                                            <!-- Customer Phone Barcode - Left side -->
+                                            <td colspan='2' class='text-center barcode-container' style='border: none !important; border-left: none !important; border-right: 1px solid black !important; border-top: none !important; border-bottom: none !important; width: 50% !important; display: table-cell !important; vertical-align: middle; padding: 5px; margin: 0; background: #f0f0f0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;'>
+                                                <div class="barcode-container" style="height: 60px; display: flex !important; align-items: center !important; justify-content: center !important; flex-direction: column; visibility: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; width: 100%; margin: 0; padding: 0;">
                                                     @if($vest->customer && $vest->customer->phone && $vest->customer->phone->pho_no)
                                                         @php
                                                             try {
                                                                 $barcode = new \Milon\Barcode\DNS1D();
-                                                                echo $barcode->getBarcodeHTML($vest->customer->phone->pho_no, 'C128', 1.5, 30);
+                                                                // Display barcode with integrated text, full width
+                                                                echo $barcode->getBarcodeHTML((string)$vest->customer->phone->pho_no, 'C128', 2.5, 35, 'black', true);
                                                             } catch (\Exception $e) {
-                                                                echo '<div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>';
+                                                                echo '<div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>';
+                                                                echo '<p style="margin-top: 5px; font-size: 12px; text-align: center;">' . htmlspecialchars($vest->customer->phone->pho_no) . '</p>';
                                                             }
                                                         @endphp
                                                     @else
-                                                        <div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>
+                                                        <div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>
+                                                        <p style="margin-top: 5px; font-size: 12px; text-align: center;">N/A</p>
                                                     @endif
-                                                    <p>{{ ($vest->customer && $vest->customer->phone) ? $vest->customer->phone->pho_no : 'N/A' }}</p>
                                                 </div>
                                             </td>
-                                            <td colspan='2' class='text-center p-5' style='border-bottom: 3px dashed black;'>
-                                                <!-- Vest Measurement ID Barcode -->
-                                                <div style="height: 60px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                            <!-- Vest Measurement ID Barcode - Right side -->
+                                            <td colspan='2' class='text-center barcode-container' style='border: none !important; border-left: none !important; border-right: none !important; border-top: none !important; border-bottom: none !important; width: 50% !important; display: table-cell !important; vertical-align: middle; padding: 5px; margin: 0; background: #f0f0f0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;'>
+                                                <div class="barcode-container" style="height: 60px; display: flex !important; align-items: center !important; justify-content: center !important; flex-direction: column; visibility: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; width: 100%; margin: 0; padding: 0;">
                                                     @if($vest->V_M_ID)
                                                         @php
                                                             try {
                                                                 $barcode = new \Milon\Barcode\DNS1D();
-                                                                echo $barcode->getBarcodeHTML($vest->V_M_ID, 'C128', 1.5, 30);
+                                                                // Display barcode with integrated text, full width
+                                                                echo $barcode->getBarcodeHTML((string)$vest->V_M_ID, 'C128', 2.5, 35, 'black', true);
                                                             } catch (\Exception $e) {
-                                                                echo '<div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>';
+                                                                echo '<div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>';
+                                                                echo '<p style="margin-top: 5px; font-size: 12px; text-align: center;">' . htmlspecialchars($vest->V_M_ID) . '</p>';
                                                             }
                                                         @endphp
                                                     @else
-                                                        <div style="height: 30px; width: 150px; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px);"></div>
+                                                        <div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>
+                                                        <p style="margin-top: 5px; font-size: 12px; text-align: center;">N/A</p>
                                                     @endif
-                                                    <p>{{ $vest->V_M_ID ?? 'N/A' }}</p>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-end font-monospace">
                                                 <span>
-                                                    {{ $invoice->inc_date }}--{{ $vest->R_date }}
-                                                    --> 
+                                                    {{ $invoice->inc_date }}--
+                                                    {{ $vest->R_date }}
                                                     @php
-                                                        $orderDate = \Carbon\Carbon::parse($invoice->inc_date);
-                                                        $receiveDate = \Carbon\Carbon::parse($vest->R_date);
-                                                        $daysDiff = $orderDate->diffInDays($receiveDate);
+                                                        try {
+                                                            $date1 = new DateTime($invoice->inc_date);
+                                                            $date2 = new DateTime($vest->R_date);
+                                                            $interval = $date1->diff($date2);
+                                                            echo "--> " . $interval->format('%a days');
+                                                        } catch (\Exception $e) {
+                                                            echo "--> 0 days";
+                                                        }
                                                     @endphp
-                                                    {{ $daysDiff }} days
                                                 </span>
                                                 <span>تاریخ واپسی ـ</span>
                                             </td>

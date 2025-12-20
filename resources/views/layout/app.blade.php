@@ -452,6 +452,18 @@
                         <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                     </a>
 
+                <!-- Payment Report -->
+                <a href="{{ route('payment-reports.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-teal-50 hover:to-cyan-50 text-gray-700 hover:text-teal-700 transition-all duration-200 group border border-blue-300 hover:border-teal-200/50
+                {{ request()->routeIs('payment-reports.index') ? 'bg-teal-100 text-teal-700 border-teal-300' : 'text-gray-700 hover:text-teal-700 hover:bg-gradient-to-r hover:from-teal-50 hover:to-cyan-50 hover:border-teal-200/50 border-blue-300' }}">
+                    <div class="w-8 h-8 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3 group-hover:shadow-md transition-all duration-200">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="font-medium">{{ __('Payment Report') }}</span>
+                    <div class="ml-auto w-2 h-2 bg-teal-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                </a>
+
                 <!-- Settings Management -->
                 <a href="{{ route('settings.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 text-gray-700 hover:text-purple-700 transition-all duration-200 group border border-blue-300 hover:border-purple-200/50
                 {{ request()->routeIs('settings.*') ? 'bg-purple-100 text-purple-700 border-purple-300' : 'text-gray-700 hover:text-purple-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:border-purple-200/50 border-blue-300' }}">
@@ -554,6 +566,7 @@
                 {{ __('Stock Report') }}
             </a>
         </li>
+        
     </ul>
 </div>
                 --}}

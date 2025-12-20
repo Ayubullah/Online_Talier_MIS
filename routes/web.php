@@ -121,6 +121,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('payments', PaymentController::class);
     Route::get('payments/{payment}/invoice', [PaymentController::class, 'invoice'])->name('payments.invoice');
     
+    // Payment Report (admin only)
+    Route::get('payment-reports', [App\Http\Controllers\PaymentReportController::class, 'index'])->name('payment-reports.index');
+    
     // Settings management (admin only)
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::post('/settings/backup-database', [SettingsController::class, 'backupDatabase'])->name('settings.backup-database');
