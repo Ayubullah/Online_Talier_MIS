@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "ayubullah/online-tailor-mis",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Online Tailor Management Information System - A comprehensive web-based management system for tailoring businesses",
+    "keywords": ["laravel", "tailor", "management", "mis", "inventory", "order-management", "php"],
     "license": "MIT",
     "require": {
         "php": "^8.2",

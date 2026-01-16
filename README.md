@@ -1,61 +1,458 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧵 Online Tailor Management Information System (MIS)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<div align="center">
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**A comprehensive web-based management system designed specifically for tailoring businesses to streamline operations, manage orders, track employees, and handle financial transactions.**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+[Features](#-features) • [Installation](#-installation) • [Documentation](#-documentation) • [Screenshots](#-screenshots) • [Contributing](#-contributing)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+</div>
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📋 Table of Contents
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- [Overview](#-overview)
+- [Features](#-features)
+- [Technology Stack](#-technology-stack)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [API Documentation](#-api-documentation)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🎯 Overview
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+The Online Tailor Management Information System is a full-featured Laravel application that helps tailoring businesses manage their daily operations efficiently. The system provides comprehensive tools for managing customers, employees, orders (clothing and vests), assignments, payments, and generating invoices with barcode support.
 
-### Premium Partners
+### Key Highlights
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- ✅ **Complete Order Management** - Track cloth and vest orders from creation to completion
+- ✅ **Employee Management** - Manage employee details, assignments, and payments
+- ✅ **Customer Management** - Maintain customer records with phone-based search
+- ✅ **Financial Tracking** - Handle payments, invoices, and generate reports
+- ✅ **Multi-language Support** - English, Farsi (فارسی), and Pashto (پښتو)
+- ✅ **Role-based Access Control** - Admin and User roles with different permissions
+- ✅ **Barcode Integration** - Generate barcodes for easy tracking
+- ✅ **Search Functionality** - Quick search by phone number across all modules
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## ✨ Features
 
-## Code of Conduct
+### 👥 Customer Management
+- Complete customer database with contact information
+- Phone number-based search functionality
+- Customer payment tracking and history
+- Invoice generation with printable formats
+- Size measurement printing for records
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 👔 Order Management
+- **Cloth Orders**: Full lifecycle management for clothing orders
+  - Create, edit, and view cloth measurements
+  - Print invoices and size sheets
+  - Track order status and progress
+- **Vest Orders**: Similar comprehensive management for vest orders
+  - Complete vest measurement tracking
+  - Status management and reporting
 
-## Security Vulnerabilities
+### 👨‍💼 Employee Management
+- Employee profile management with photos
+- Role-based access (Admin/Employee)
+- Assignment tracking for cloth and vest orders
+- Payment and salary management
+- Specialized rate tracking for different order types
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 📋 Assignment System
+- Assign orders to employees
+- Track pending and completed assignments
+- Real-time status updates
+- Employee-specific assignment views
 
-## License
+### 💰 Financial Management
+- Payment processing and tracking
+- Invoice generation with barcode support
+- Payment reports and analytics
+- Customer payment history
+- Employee payment records
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 🔍 Advanced Search
+- Phone number-based search across all modules
+- Quick access to customer and order information
+- Integrated search results with action buttons
+
+### 🌐 Multi-language Support
+- **English** - Default language
+- **Farsi (فارسی)** - Persian language support
+- **Pashto (پښتو)** - Pashto language support
+- Easy language switching via session-based locale
+
+### ⚙️ System Administration
+- Database backup and restore functionality
+- Cache management
+- Application optimization tools
+- Settings management
+- Backup history and download
+
+### 📊 Reporting & Analytics
+- Payment reports
+- Employee performance tracking
+- Order status reports
+- Financial summaries
+
+---
+
+## 🛠 Technology Stack
+
+### Backend
+- **Laravel 12.x** - PHP Framework
+- **PHP 8.2+** - Programming Language
+- **MySQL/MariaDB** - Database (SQLite for development)
+
+### Frontend
+- **Tailwind CSS** - Utility-first CSS framework
+- **Alpine.js** - Lightweight JavaScript framework
+- **Vite** - Next-generation frontend tooling
+
+### Additional Packages
+- **milon/barcode** - Barcode generation
+- **openai-php/laravel** - AI integration capabilities
+- **tom-select** - Enhanced select dropdowns
+
+### Development Tools
+- **Pest PHP** - Testing framework
+- **Laravel Pint** - Code style fixer
+- **Laravel Pail** - Log viewer
+
+---
+
+## 📦 Requirements
+
+Before installing, ensure your system meets the following requirements:
+
+- **PHP**: >= 8.2
+- **Composer**: Latest version
+- **Node.js**: >= 18.x and npm
+- **Database**: MySQL 8.0+ / MariaDB 10.3+ / SQLite 3
+- **Web Server**: Apache / Nginx
+- **PHP Extensions**:
+  - BCMath
+  - Ctype
+  - Fileinfo
+  - JSON
+  - Mbstring
+  - OpenSSL
+  - PDO
+  - Tokenizer
+  - XML
+
+---
+
+## 🚀 Installation
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/Ayubullah/Online_Talier_MIS.git
+cd Online_Talier_MIS
+```
+
+### Step 2: Install PHP Dependencies
+
+```bash
+composer install
+```
+
+### Step 3: Install Node Dependencies
+
+```bash
+npm install
+```
+
+### Step 4: Environment Configuration
+
+Copy the `.env.example` file to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+### Step 5: Configure Database
+
+Edit the `.env` file and update your database credentials:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=talier_mis
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+### Step 6: Run Migrations
+
+```bash
+php artisan migrate
+```
+
+### Step 7: Seed Database (Optional)
+
+```bash
+php artisan db:seed
+```
+
+### Step 8: Build Frontend Assets
+
+For development:
+```bash
+npm run dev
+```
+
+For production:
+```bash
+npm run build
+```
+
+### Step 9: Start Development Server
+
+```bash
+php artisan serve
+```
+
+The application will be available at `http://localhost:8000`
+
+### Quick Start (All-in-One Command)
+
+For a complete development environment setup:
+
+```bash
+composer dev
+```
+
+This command starts:
+- Laravel development server
+- Queue worker
+- Laravel Pail (log viewer)
+- Vite development server
+
+---
+
+## ⚙️ Configuration
+
+### Application Settings
+
+Key configuration files located in the `config/` directory:
+
+- `app.php` - Application settings
+- `database.php` - Database configuration
+- `auth.php` - Authentication settings
+- `barcode.php` - Barcode generation settings
+
+### Storage & Uploads
+
+Ensure the following directories are writable:
+
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+### Email Configuration
+
+Configure mail settings in `.env` for email notifications:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=your_smtp_host
+MAIL_PORT=587
+MAIL_USERNAME=your_email
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@yourdomain.com
+```
+
+---
+
+## 📖 Usage
+
+### First-Time Setup
+
+1. **Create Admin Account**: Register the first admin user through the registration page
+2. **Configure Settings**: Access Settings page to configure system preferences
+3. **Add Employees**: Create employee profiles in the Employees section
+4. **Add Customers**: Start adding customers through the Customers section
+
+### Basic Workflow
+
+1. **Customer Registration**: Add new customers with their contact information
+2. **Order Creation**: Create cloth or vest orders with measurements
+3. **Assignment**: Assign orders to available employees
+4. **Progress Tracking**: Monitor assignment status and updates
+5. **Payment Processing**: Record payments and generate invoices
+6. **Completion**: Mark orders as complete and update employee records
+
+### User Roles
+
+#### Admin
+- Full system access
+- Employee and customer management
+- Order and assignment management
+- Payment and invoice processing
+- System settings and backups
+- Reports and analytics
+
+#### User (Employee)
+- View assigned orders
+- Update order status
+- View personal transactions
+- Access size information
+
+---
+
+## 📁 Project Structure
+
+```
+Online_Talier_MIS/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/      # Application controllers
+│   │   └── Middleware/       # Custom middleware
+│   ├── Models/               # Eloquent models
+│   └── Services/             # Business logic services
+├── database/
+│   ├── migrations/           # Database migrations
+│   └── seeders/              # Database seeders
+├── resources/
+│   ├── views/                # Blade templates
+│   ├── css/                  # Stylesheets
+│   └── js/                   # JavaScript files
+├── routes/
+│   ├── web.php              # Web routes
+│   └── auth.php             # Authentication routes
+├── public/                   # Public assets
+└── storage/                  # Storage and uploads
+```
+
+### Key Directories
+
+- **Controllers**: Handle HTTP requests and business logic
+- **Models**: Define database relationships and business rules
+- **Views**: Blade templates for the user interface
+- **Migrations**: Database schema definitions
+- **Routes**: Application route definitions
+
+---
+
+## 🔌 API Documentation
+
+### Search Endpoints
+
+#### Get Cloth Measurement Details
+```
+GET /api/cloth-measurement/{id}
+```
+
+#### Get Vest Measurement Details
+```
+GET /api/vest-measurement/{id}
+```
+
+### Authentication
+
+The application uses Laravel's built-in authentication system with session-based authentication.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Contribution Guidelines
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Code Style
+
+We use Laravel Pint for code formatting:
+
+```bash
+./vendor/bin/pint
+```
+
+### Testing
+
+Run tests using Pest:
+
+```bash
+php artisan test
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🆘 Support
+
+For support, email [your-email@example.com] or open an issue in the repository.
+
+### Common Issues
+
+**Issue**: Database connection error
+- **Solution**: Verify `.env` database credentials and ensure database exists
+
+**Issue**: Permission denied errors
+- **Solution**: Run `chmod -R 775 storage bootstrap/cache`
+
+**Issue**: Assets not loading
+- **Solution**: Run `npm install && npm run build`
+
+---
+
+## 👨‍💻 Author
+
+**Ayubullah**
+
+- GitHub: [@Ayubullah](https://github.com/Ayubullah)
+
+---
+
+## 🙏 Acknowledgments
+
+- Laravel Framework and community
+- All contributors who have helped improve this project
+- Tailoring businesses for inspiring this solution
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you find it helpful!**
+
+Made with ❤️ using Laravel
+
+</div>
