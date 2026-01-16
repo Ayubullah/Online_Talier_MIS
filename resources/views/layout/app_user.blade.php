@@ -9,8 +9,8 @@
     <!-- Compiled Tailwind CSS -->
     <link rel="stylesheet" href="{{ asset('build/assets/app-CL2N_vcB.css') }}">
     
-    <!-- Local Alpine.js -->
-    <script defer src="{{ asset('assets/alpinejs/alpine.min.js') }}"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
     @yield('styles')
 
@@ -736,14 +736,14 @@
     });
 </script>
 
-<!-- Local Select2 CSS -->
-<link href="{{ asset('assets/select2/css/select2.min.css') }}" rel="stylesheet">
+<!-- Select2 CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
 
-<!-- jQuery (offline version) -->
-<script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-<!-- Local Select2 JS -->
-<script src="{{ asset('assets/select2/js/select2.min.js') }}"></script>
+<!-- Select2 JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 <!-- Profile Modal -->

@@ -29,7 +29,7 @@ class CustomerController extends Controller
         }
 
         // Return view for web requests
-        return view('cloth.customers.index', compact('clothMeasurements'));
+        return view('cloth.index', compact('clothMeasurements'));
     }
 
     /**
@@ -46,7 +46,7 @@ class CustomerController extends Controller
         }
 
         // Return view for web requests
-        return view('cloth.customers.create');
+        return view('search.Cloth_create');
     }
 
     /**
@@ -253,7 +253,8 @@ class CustomerController extends Controller
         $customer->load([
             'phone',
             'invoice',
-            'clothMeasurements',
+            'clothMeasurements.customer.phone',
+            'clothMeasurements.clothAssignments.employee',
             'vestMeasurements',
             'customerPayments'
         ]);
@@ -267,7 +268,21 @@ class CustomerController extends Controller
         }
 
         // Return view for web requests
-        return view('cloth.customers.show', compact('customer'));
+        $clothM = $customer->clothMeasurements->first();
+        if (!$clothM) {
+            return redirect()->route('customers.index')
+                ->withErrors(['error' => 'No cloth measurement found for this customer.']);
+        }
+        // Reload the clothM with all necessary relationships to ensure customer is loaded
+        $clothM = ClothM::with(['customer.phone', 'customer.invoice', 'clothAssignments.employee'])
+            ->find($clothM->cm_id);
+        
+        if (!$clothM || !$clothM->customer) {
+            return redirect()->route('customers.index')
+                ->withErrors(['error' => 'Cloth measurement or customer data not found.']);
+        }
+        
+        return view('cloth.show', compact('clothM'));
     }
 
     /**
@@ -306,7 +321,13 @@ class CustomerController extends Controller
         }
 
         // Return view for web requests
-        return view('cloth.customers.edit', compact('customer'));
+        $clothM = $customer->clothMeasurements->first();
+        if ($clothM) {
+            $clothM->load('customer.phone', 'customer.invoice');
+            return view('cloth.edit', compact('clothM'));
+        }
+        return redirect()->route('customers.index')
+            ->withErrors(['error' => 'No cloth measurement found for this customer.']);
     }
 
     /**
@@ -489,7 +510,7 @@ class CustomerController extends Controller
         $totalPaid = Payment::where('F_inc_id', $invoiceId)->sum('amount');
         $totalRemain = $totalRate - $totalPaid;
 
-        return view('cloth.customers.print', compact('cloths', 'invoice', 'totalRate', 'totalPaid', 'totalRemain', 'invoiceId'));
+        return view('cloth.print', compact('cloths', 'invoice', 'totalRate', 'totalPaid', 'totalRemain', 'invoiceId'));
     }
 
     /**
@@ -507,6 +528,6 @@ class CustomerController extends Controller
         // Get invoice details if available (already loaded via eager loading)
         $invoice = $cloth->customer->invoice ?? null;
 
-        return view('cloth.customers.sizePrint', compact('cloth', 'invoice'));
+        return view('cloth.sizePrint', compact('cloth'));
     }
 }

@@ -91,7 +91,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('vests/print-size/{vestId}', [VestController::class, 'printSize'])->name('vests.print-size');
     Route::resource('vests', VestController::class);
     
-    // Cloth measurements
+    // Cloth management (similar to vests)
+    Route::get('cloth/print/{invoiceId}', [ClothMController::class, 'printInvoice'])->name('cloth.print');
+    Route::get('cloth/print-size/{clothId}', [ClothMController::class, 'printSize'])->name('cloth.print-size');
+    Route::resource('cloth', ClothMController::class);
+    
+    // Cloth measurements (keep for backward compatibility)
     Route::resource('cloth-measurements', ClothMController::class);
     
     // Cloth assignments

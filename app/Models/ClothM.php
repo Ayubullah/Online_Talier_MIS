@@ -14,6 +14,14 @@ class ClothM extends Model
     protected $primaryKey = 'cm_id';
     public $timestamps = true;
 
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName()
+    {
+        return 'cm_id';
+    }
+
     protected $fillable = [
         'F_cus_id',
         'size',

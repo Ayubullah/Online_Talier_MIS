@@ -9,8 +9,8 @@
     <!-- Compiled Tailwind CSS -->
     <link rel="stylesheet" href="{{ asset('build/assets/app-CL2N_vcB.css') }}">
     
-    <!-- Local Alpine.js -->
-    <script defer src="{{ asset('assets/alpinejs/alpine.min.js') }}"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
     @yield('styles')
 
@@ -214,9 +214,9 @@
                     <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 </a>
 
-                <!-- Customers Management -->
-                <a href="{{ route('customers.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 text-gray-700 hover:text-indigo-700 transition-all duration-200 group border border-blue-300 hover:border-indigo-200/50
-                {{ request()->routeIs('customers.*') ? 'bg-indigo-100 text-indigo-700 border-indigo-300' : 'text-gray-700 hover:text-indigo-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 hover:border-indigo-200/50 border-blue-300' }}">
+                <!-- Cloth Management -->
+                <a href="{{ route('cloth.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 text-gray-700 hover:text-indigo-700 transition-all duration-200 group border border-blue-300 hover:border-indigo-200/50
+                {{ request()->routeIs('cloth.*') ? 'bg-indigo-100 text-indigo-700 border-indigo-300' : 'text-gray-700 hover:text-indigo-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 hover:border-indigo-200/50 border-blue-300' }}">
                     <div class="w-8 h-8 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 group-hover:shadow-md transition-all duration-200">
                         <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.196-2.196M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a3 3 0 11-6 0 3 3 0 016 0zm-1 4a3 3 0 00-3 3v2h8v-2a3 3 0 00-3-3z"></path>
@@ -913,14 +913,14 @@
     });
 </script>
 
-<!-- Local Select2 CSS -->
-<link href="{{ asset('assets/select2/css/select2.min.css') }}" rel="stylesheet">
+<!-- Select2 CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
 
-<!-- jQuery (offline version) -->
-<script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-<!-- Local Select2 JS -->
-<script src="{{ asset('assets/select2/js/select2.min.js') }}"></script>
+<!-- Select2 JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 <!-- Profile Modal -->
