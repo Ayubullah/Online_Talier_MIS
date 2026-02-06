@@ -8,23 +8,34 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Times New Roman', Times, serif;
 }
 
 @layer components {
     .card-hover {
         @apply transition-all duration-300 ease-in-out;
     }
-    
+
     .card-hover:hover {
         @apply transform scale-105 shadow-2xl;
     }
-    
+
     .animate-fade-in {
         animation: fadeIn 0.6s ease-in-out;
     }
-    
+
+    .animate-slide-up {
+        animation: slideUp 0.8s ease-out;
+    }
+
+    .animate-pulse-glow {
+        animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    .animate-bounce-subtle {
+        animation: bounceSubtle 2s ease-in-out infinite;
+    }
+
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -34,5 +45,62 @@
             opacity: 1;
             transform: translateY(0);
         }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+        }
+        50% {
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+        }
+    }
+
+    @keyframes bounceSubtle {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    /* Modern form styling utilities */
+    .form-input-modern {
+        @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-700 bg-gray-50 transition-all duration-300 focus:border-blue-500 focus:bg-white focus:shadow-lg focus:outline-none;
+    }
+
+    .btn-primary-modern {
+        @apply w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300;
+    }
+
+    .btn-primary-modern:hover {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    }
+
+    /* Glass morphism effect */
+    .glass-effect {
+        backdrop-filter: blur(16px);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 }

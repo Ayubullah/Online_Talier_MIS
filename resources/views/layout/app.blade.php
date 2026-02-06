@@ -4,15 +4,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title' , 'dashboard')</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('image/logo.png') }}">
     
     <!-- Compiled Tailwind CSS -->
     <link rel="stylesheet" href="{{ asset('build/assets/app-CL2N_vcB.css') }}">
     
-    <!-- Alpine.js CDN -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <!-- Local Alpine.js -->
+    <script defer src="{{ asset('assets/alpinejs/alpine.min.js') }}"></script>
 
     @yield('styles')
+    
+    <!-- Global Font Style -->
+    <style>
+        * {
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+    </style>
 
     <!-- Select2 CSS Styling -->
     <style>
@@ -174,23 +185,23 @@
 
 </head>
 
-<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen {{ in_array(app()->getLocale(), ['fa', 'ps']) ? 'font-serif' : 'font-sans' }}">
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen" style="font-family: 'Times New Roman', Times, serif;">
 
     <div class="flex h-screen">
         <!-- Mobile Overlay -->
         <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 lg:hidden hidden"></div>
         
         <!-- Sidebar -->
-        <div id="sidebar" class="w-64 bg-blue-100 backdrop-blur-xl h-screen shadow-xl border-r border-gray-200/50 p-6 space-y-6 fixed z-20 overflow-y-auto lg:block hidden transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+        <div id="sidebar" class="w-64 bg-blue-100 backdrop-blur-xl h-screen shadow-xl border-r border-gray-200/50 p-6 space-y-6 fixed z-20 overflow-y-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
 
 
             <!-- Logo Section -->
             <div class="flex items-center space-x-3 mb-8">
-                <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <span class="text-white font-bold text-lg">M</span>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+                    <img src="{{ asset('image/logo.png') }}" alt="Shahid Tailor Logo" class="w-full h-full object-contain">
                 </div>
                 <div>
-                    <h2 class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">MyApp</h2>
+                    <h2 class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">Shahid</h2>
                     <p class="text-xs text-gray-500">{{ __('dashboard') }}</p>
                 </div>
             </div>
@@ -214,9 +225,26 @@
                     <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 </a>
 
-                <!-- Cloth Management -->
-                <a href="{{ route('cloth.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 text-gray-700 hover:text-indigo-700 transition-all duration-200 group border border-blue-300 hover:border-indigo-200/50
-                {{ request()->routeIs('cloth.*') ? 'bg-indigo-100 text-indigo-700 border-indigo-300' : 'text-gray-700 hover:text-indigo-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 hover:border-indigo-200/50 border-blue-300' }}">
+                <!-- Search Management -->
+                <a href="{{ route('search.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 text-gray-700 hover:text-blue-700 transition-all duration-200 group border border-blue-300 hover:border-blue-200/50
+                {{ request()->routeIs('search.*') ? 'bg-blue-100 text-blue-700 border-blue-300' : 'text-gray-700 hover:text-blue-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:border-blue-200/50 border-blue-300' }}">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3 group-hover:shadow-md transition-all duration-200 relative overflow-hidden">
+                            <!-- Background glow effect -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                            <!-- Search icon with animation -->
+                            <svg class="w-5 h-5 text-white relative z-10 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <!-- Pulsing search ring -->
+                            <div class="absolute inset-0 border-2 border-white/30 rounded-lg opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
+                        </div>
+                    <span class="font-medium">{{ __('Search') }}</span>
+                        <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    </a>
+
+                <!-- Customers Management -->
+                <a href="{{ route('customers.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 text-gray-700 hover:text-indigo-700 transition-all duration-200 group border border-blue-300 hover:border-indigo-200/50
+                {{ request()->routeIs('customers.*') ? 'bg-indigo-100 text-indigo-700 border-indigo-300' : 'text-gray-700 hover:text-indigo-700 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 hover:border-indigo-200/50 border-blue-300' }}">
                     <div class="w-8 h-8 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 group-hover:shadow-md transition-all duration-200">
                         <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.196-2.196M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a3 3 0 11-6 0 3 3 0 016 0zm-1 4a3 3 0 00-3 3v2h8v-2a3 3 0 00-3-3z"></path>
@@ -238,33 +266,7 @@
                     <div class="ml-auto w-2 h-2 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 </a>
 
-               
 
-               
-
-                <!-- Cloth Assignments -->
-                <a href="{{ route('cloth-assignments.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 text-gray-700 hover:text-orange-700 transition-all duration-200 group border border-blue-300 hover:border-orange-200/50
-                {{ request()->routeIs('cloth-assignments.*') ? 'bg-orange-100 text-orange-700 border-orange-300' : 'text-gray-700 hover:text-orange-700 hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 hover:border-orange-200/50 border-blue-300' }}">
-                    <div class="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3 group-hover:shadow-md transition-all duration-200">
-                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <span class="font-medium">{{ __('Cloth Assignments') }}</span>
-                    <div class="ml-auto w-2 h-2 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                </a>
-
-                <!-- Vest Assignments -->
-                <a href="{{ route('vest-assignments.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 text-gray-700 hover:text-blue-700 transition-all duration-200 group border border-blue-300 hover:border-blue-200/50
-                {{ request()->routeIs('vest-assignments.*') ? 'bg-blue-100 text-blue-700 border-blue-300' : 'text-gray-700 hover:text-blue-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:border-blue-200/50 border-blue-300' }}">
-                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3 group-hover:shadow-md transition-all duration-200">
-                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                        </svg>
-                    </div>
-                    <span class="font-medium">{{ __('Vest Assignments') }}</span>
-                    <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                </a>
 
                 <!-- Status Management -->
                 <a href="{{ route('admin.status.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 text-gray-700 hover:text-purple-700 transition-all duration-200 group border border-blue-300 hover:border-purple-200/50
@@ -435,22 +437,6 @@
 
                 
 
-                <!-- Search Management -->
-                <a href="{{ route('search.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 text-gray-700 hover:text-blue-700 transition-all duration-200 group border border-blue-300 hover:border-blue-200/50
-                {{ request()->routeIs('search.*') ? 'bg-blue-100 text-blue-700 border-blue-300' : 'text-gray-700 hover:text-blue-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:border-blue-200/50 border-blue-300' }}">
-                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3 group-hover:shadow-md transition-all duration-200 relative overflow-hidden">
-                            <!-- Background glow effect -->
-                            <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-                            <!-- Search icon with animation -->
-                            <svg class="w-5 h-5 text-white relative z-10 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                            <!-- Pulsing search ring -->
-                            <div class="absolute inset-0 border-2 border-white/30 rounded-lg opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-                        </div>
-                    <span class="font-medium">{{ __('Search') }}</span>
-                        <div class="ml-auto w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                    </a>
 
                 <!-- Payment Report -->
                 <a href="{{ route('payment-reports.index') }}" class="flex items-center p-2 rounded-xl hover:bg-gradient-to-r hover:from-teal-50 hover:to-cyan-50 text-gray-700 hover:text-teal-700 transition-all duration-200 group border border-blue-300 hover:border-teal-200/50
@@ -591,13 +577,13 @@
 
                         <!-- Mobile Menu Button -->
                         <div class="lg:hidden flex items-center space-x-3">
-                            <button id="mobileMenuBtn" class="rounded-xl bg-white/50 backdrop-blur-sm border border-gray-200/50 text-gray-700 hover:bg-white/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                            <button id="mobileMenuBtn" class="p-2 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-200/50 text-gray-700 hover:bg-white/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                                 </svg>
                             </button>
-                            <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                                <span class="text-white font-bold text-sm">M</span>
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden">
+                                <img src="{{ asset('image/logo.png') }}" alt="Shahid Tailor Logo" class="w-full h-full object-contain">
                             </div>
                             <h1 class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">{{ __('dashboard') }}</h1>
                             
@@ -612,31 +598,28 @@
                         <!-- Right Side Actions -->
                         <div class="flex items-center space-x-4 ml-auto">
 
-                            <!-- Quick Actions -->
-                            <button class="relative p-2 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-200/50 text-gray-700 hover:bg-white/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 group">
+
+                            <!-- General Search -->
+                            <a href="{{ route('search.index') }}" class="relative p-2 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-200/50 text-gray-700 hover:bg-white/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 group">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                                 <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                                    {{ __('Quick Actions') }}
+                                    {{ __('General Search') }}
                                 </span>
-                            </button>
-
-                            <!-- General Notifications -->
-                            <button class="relative p-2 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-200/50 text-gray-700 hover:bg-white/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                                </svg>
-                                <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
                             </a>
 
-                            <!-- Messages -->
-                            <button class="relative p-2 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-200/50 text-gray-700 hover:bg-white/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                            <!-- Employee Search -->
+                            <a href="{{ route('employees.index') }}" class="relative p-2 rounded-xl bg-white/50 backdrop-blur-sm border border-gray-200/50 text-gray-700 hover:bg-white/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 group">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.196-2.196M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a3 3 0 11-6 0 3 3 0 016 0zm-1 4a3 3 0 00-3 3v2h8v-2a3 3 0 00-3-3z"></path>
                                 </svg>
-                                <span class="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-white"></span>
-                            </button>
+                                <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                                    {{ __('Employee Search') }}
+                                </span>
+                            </a>
+
+
 
                             <!-- Language Selector Dropdown -->
                             <div class="relative" x-data="{ open: false }">
@@ -845,26 +828,48 @@
     const sidebar = document.getElementById('sidebar');
     const mobileOverlay = document.getElementById('mobileOverlay');
 
+    function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        mobileOverlay.classList.remove('hidden');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        mobileOverlay.classList.add('hidden');
+    }
+
+    function isMobile() {
+        return window.innerWidth < 1024;
+    }
+
     mobileMenuBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('-translate-x-full');
-        mobileOverlay.classList.toggle('hidden');
+        if (sidebar.classList.contains('-translate-x-full')) {
+            openSidebar();
+        } else {
+            closeSidebar();
+        }
     });
 
     // Close sidebar when clicking overlay
     mobileOverlay.addEventListener('click', () => {
-        sidebar.classList.add('-translate-x-full');
-        mobileOverlay.classList.add('hidden');
+        closeSidebar();
     });
 
     // Close sidebar when clicking on a link (mobile)
     const sidebarLinks = sidebar.querySelectorAll('a');
     sidebarLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (window.innerWidth < 1024) {
-                sidebar.classList.add('-translate-x-full');
-                mobileOverlay.classList.add('hidden');
+            if (isMobile()) {
+                closeSidebar();
             }
         });
+    });
+
+    // Handle window resize - close mobile menu when switching to desktop
+    window.addEventListener('resize', () => {
+        if (!isMobile()) {
+            closeSidebar();
+        }
     });
 
     // Profile modal logic (after DOM is ready)
@@ -913,14 +918,14 @@
     });
 </script>
 
-<!-- Select2 CSS CDN -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+<!-- Local Select2 CSS -->
+<link href="{{ asset('assets/select2/css/select2.min.css') }}" rel="stylesheet">
 
-<!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<!-- jQuery (offline version) -->
+<script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
 
-<!-- Select2 JS CDN -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Local Select2 JS -->
+<script src="{{ asset('assets/select2/js/select2.min.js') }}"></script>
 
 
 <!-- Profile Modal -->

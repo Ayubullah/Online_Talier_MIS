@@ -164,7 +164,7 @@
     <div class="row">
         <div class="col-12">
             <div class="col-sm-12">
-                <img src="{{ asset('image/logo.jpg') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
+                <img src="{{ asset('image/logo.png') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
                 <h1 style="font-family:'Times New Roman', Times, serif;" class="text-center"><b>شاهید خیاطی و رخت فروشی</b></h1>
                 <p class="font-17 text-black fw-bold text-center m-0" style="font-family:'Times New Roman', Times, serif;">
                     <span class="ri-whatsapp-line"></span><strong> +93784444247 </strong> &nbsp;&nbsp;&nbsp;&nbsp;

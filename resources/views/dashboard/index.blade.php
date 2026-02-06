@@ -25,13 +25,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Total Customers</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Total Customers') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($usersCount ?? 0) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm {{ ($usersChange ?? 0) >= 0 ? 'text-green-600' : 'text-red-600' }}">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ ($usersChange ?? 0) >= 0 ? 'M5 10l7-7 7 7' : 'M19 14l-7 7-7-7' }}" />
                             </svg>
-                            {{ abs($usersChange ?? 0) }}% vs last month
+                            {{ abs($usersChange ?? 0) }}% {{ __('vs last month') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center shadow-lg">
@@ -46,13 +46,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Total Orders</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Total Orders') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($ordersCount ?? 0) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm {{ ($ordersChange ?? 0) >= 0 ? 'text-green-600' : 'text-red-600' }}">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ ($ordersChange ?? 0) >= 0 ? 'M5 10l7-7 7 7' : 'M19 14l-7 7-7-7' }}" />
                             </svg>
-                            {{ abs($ordersChange ?? 0) }}% vs last month
+                            {{ abs($ordersChange ?? 0) }}% {{ __('vs last month') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white flex items-center justify-center shadow-lg">
@@ -67,13 +67,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Total Revenue</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Total Revenue') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">AFN {{ number_format($revenue ?? 0, 2) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm {{ ($revenueChange ?? 0) >= 0 ? 'text-green-600' : 'text-red-600' }}">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ ($revenueChange ?? 0) >= 0 ? 'M5 10l7-7 7 7' : 'M19 14l-7 7-7-7' }}" />
                             </svg>
-                            {{ abs($revenueChange ?? 0) }}% vs last month
+                            {{ abs($revenueChange ?? 0) }}% {{ __('vs last month') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 text-white flex items-center justify-center shadow-lg">
@@ -88,13 +88,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Total Profit</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Total Profit') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">AFN {{ number_format($profit ?? 0, 2) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm {{ ($profitChange ?? 0) >= 0 ? 'text-green-600' : 'text-red-600' }}">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ ($profitChange ?? 0) >= 0 ? 'M5 10l7-7 7 7' : 'M19 14l-7 7-7-7' }}" />
                             </svg>
-                            {{ abs($profitChange ?? 0) }}% vs last month
+                            {{ abs($profitChange ?? 0) }}% {{ __('vs last month') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center shadow-lg">
@@ -112,13 +112,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Pending Work</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Pending Work') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($pendingAssignments ?? 0) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm text-orange-600">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            In Progress
+                            {{ __('In Progress') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 text-white flex items-center justify-center shadow-lg">
@@ -133,13 +133,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Completed Work</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Completed Work') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($completedAssignments ?? 0) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm text-green-600">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            Finished
+                            {{ __('Finished') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white flex items-center justify-center shadow-lg">
@@ -154,13 +154,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Total Employees</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Total Employees') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($totalEmployees ?? 0) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm text-blue-600">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.196-2.196M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a3 3 0 11-6 0 3 3 0 016 0zm-1 4a3 3 0 00-3 3v2h8v-2a3 3 0 00-3-3z"/>
                             </svg>
-                            Active Staff
+                            {{ __('Active Staff') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 text-white flex items-center justify-center shadow-lg">
@@ -175,13 +175,13 @@
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">Avg Order Value</p>
+                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wide">{{ __('Avg Order Value') }}</p>
                         <p class="text-3xl font-bold text-gray-900 mt-2">AFN {{ number_format(($ordersCount ?? 0) > 0 ? ($revenue ?? 0) / ($ordersCount ?? 1) : 0, 2) }}</p>
                         <div class="mt-3 inline-flex items-center text-sm text-indigo-600">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
                             </svg>
-                            Per Order
+                            {{ __('Per Order') }}
                         </div>
                     </div>
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-violet-600 text-white flex items-center justify-center shadow-lg">
@@ -198,7 +198,7 @@
             <!-- Revenue Chart -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-xl font-semibold text-gray-900">Revenue Trends (Last 6 Months)</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Revenue Trends (Last 6 Months)') }}</h3>
                     <div class="flex space-x-2">
                         <button class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-lg">6M</button>
                         <button class="px-3 py-1 text-sm bg-gray-100 text-gray-600 rounded-lg">1Y</button>
@@ -213,12 +213,12 @@
             <!-- Orders Chart -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Order Distribution</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Order Distribution') }}</h3>
                     <div class="flex items-center space-x-2">
                         <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                        <span class="text-sm text-gray-600">Cloth Orders</span>
+                        <span class="text-sm text-gray-600">{{ __('Cloth Orders') }}</span>
                         <div class="w-3 h-3 bg-green-500 rounded-full ml-4"></div>
-                        <span class="text-sm text-gray-600">Vest Orders</span>
+                        <span class="text-sm text-gray-600">{{ __('Vest Orders') }}</span>
                     </div>
                 </div>
                 <div class="h-80">
@@ -232,7 +232,7 @@
             <!-- Employee Performance Chart -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Employee Distribution</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Employee Distribution') }}</h3>
                     <div class="text-sm text-gray-500">Total: {{ $totalEmployees ?? 0 }}</div>
                 </div>
                 <div class="h-80">
@@ -243,8 +243,8 @@
             <!-- Assignment Status Chart -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Assignment Status</h3>
-                    <div class="text-sm text-gray-500">Work Progress</div>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Assignment Status') }}</h3>
+                    <div class="text-sm text-gray-500">{{ __('Work Progress') }}</div>
                 </div>
                 <div class="h-80">
                     <canvas id="assignmentChart" class="w-full h-full"></canvas>
@@ -257,8 +257,8 @@
             <!-- Recent Activities -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Recent Activities</h3>
-                    <a href="#" class="text-sm text-blue-600 hover:text-blue-800">View All</a>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Recent Activities') }}</h3>
+                    <a href="#" class="text-sm text-blue-600 hover:text-blue-800">{{ __('View All') }}</a>
                 </div>
                 <div class="space-y-4">
                     @if(isset($recentCustomers) && $recentCustomers->count() > 0)
@@ -266,7 +266,7 @@
                         <div class="flex items-start space-x-3">
                             <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">New customer: {{ $customer->name }}</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('New customer') }}: {{ $customer->name }}</p>
                                 <p class="text-xs text-gray-500">{{ $customer->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
@@ -275,7 +275,7 @@
                         <div class="flex items-start space-x-3">
                             <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">New customer registered</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('New customer registered') }}</p>
                                 <p class="text-xs text-gray-500">2 minutes ago</p>
                             </div>
                         </div>
@@ -286,7 +286,7 @@
                         <div class="flex items-start space-x-3">
                             <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">Cloth order #{{ $order->id }} created</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('Cloth order') }} #{{ $order->id }} {{ __('created') }}</p>
                                 <p class="text-xs text-gray-500">{{ $order->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
@@ -304,7 +304,7 @@
                     <div class="flex items-start space-x-3">
                         <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
                         <div>
-                            <p class="text-sm font-medium text-gray-900">Payment received</p>
+                            <p class="text-sm font-medium text-gray-900">{{ __('Payment received') }}</p>
                             <p class="text-xs text-gray-500">1 hour ago</p>
                         </div>
                     </div>
@@ -314,7 +314,7 @@
                         <div class="flex items-start space-x-3">
                             <div class="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">Vest order #{{ $order->id }} created</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('Vest order') }} #{{ $order->id }} {{ __('created') }}</p>
                                 <p class="text-xs text-gray-500">{{ $order->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
@@ -323,7 +323,7 @@
                         <div class="flex items-start space-x-3">
                             <div class="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">New vest measurement</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('New vest measurement') }}</p>
                                 <p class="text-xs text-gray-500">2 hours ago</p>
                             </div>
                         </div>
@@ -334,8 +334,8 @@
             <!-- Top Products -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Top Products</h3>
-                    <a href="#" class="text-sm text-blue-600 hover:text-blue-800">View All</a>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Top Products') }}</h3>
+                    <a href="#" class="text-sm text-blue-600 hover:text-blue-800">{{ __('View All') }}</a>
                 </div>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
@@ -346,8 +346,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">Cloth Orders</p>
-                                <p class="text-xs text-gray-500">Traditional wear</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('Cloth Orders') }}</p>
+                                <p class="text-xs text-gray-500">{{ __('Traditional wear') }}</p>
                             </div>
                         </div>
                         <span class="text-sm font-semibold text-gray-900">{{ $ordersCount > 0 ? round((($recentClothOrders->count() ?? 0) / $ordersCount) * 100) : 0 }}%</span>
@@ -360,8 +360,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">Vest Orders</p>
-                                <p class="text-xs text-gray-500">Modern style</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('Vest Orders') }}</p>
+                                <p class="text-xs text-gray-500">{{ __('Modern style') }}</p>
                             </div>
                         </div>
                         <span class="text-sm font-semibold text-gray-900">{{ $ordersCount > 0 ? round((($recentVestOrders->count() ?? 0) / $ordersCount) * 100) : 0 }}%</span>
@@ -374,8 +374,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">Custom Orders</p>
-                                <p class="text-xs text-gray-500">Special requests</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('Custom Orders') }}</p>
+                                <p class="text-xs text-gray-500">{{ __('Special requests') }}</p>
                             </div>
                         </div>
                         <span class="text-sm font-semibold text-gray-900">20%</span>
@@ -386,8 +386,8 @@
             <!-- Employee Performance -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Employee Performance</h3>
-                    <a href="{{ route('employees.index') }}" class="text-sm text-blue-600 hover:text-blue-800">View All</a>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Employee Performance') }}</h3>
+                    <a href="{{ route('employees.index') }}" class="text-sm text-blue-600 hover:text-blue-800">{{ __('View All') }}</a>
                 </div>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
@@ -397,7 +397,7 @@
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-900">Ahmed Khan</p>
-                                <p class="text-xs text-gray-500">Cutter</p>
+                                <p class="text-xs text-gray-500">{{ __('Cutter') }}</p>
                             </div>
                         </div>
                         <div class="text-right">
@@ -412,7 +412,7 @@
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-900">Sarah Ali</p>
-                                <p class="text-xs text-gray-500">Salaye</p>
+                                <p class="text-xs text-gray-500">{{ __('Salaye') }}</p>
                             </div>
                         </div>
                         <div class="text-right">
@@ -427,7 +427,7 @@
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-900">Mohammed</p>
-                                <p class="text-xs text-gray-500">Cutter</p>
+                                <p class="text-xs text-gray-500">{{ __('Cutter') }}</p>
                             </div>
                         </div>
                         <div class="text-right">
@@ -444,8 +444,8 @@
             <!-- Payment Summary -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Payment Summary</h3>
-                    <a href="{{ route('payments.index') }}" class="text-sm text-blue-600 hover:text-blue-800">View All</a>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Payment Summary') }}</h3>
+                    <a href="{{ route('payments.index') }}" class="text-sm text-blue-600 hover:text-blue-800">{{ __('View All') }}</a>
                 </div>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
@@ -456,8 +456,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">Total Paid</p>
-                                <p class="text-xs text-gray-500">All time payments</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('Total Paid') }}</p>
+                                <p class="text-xs text-gray-500">{{ __('All time payments') }}</p>
                             </div>
                         </div>
                         <span class="text-lg font-semibold text-green-600">AFN {{ number_format($revenue ?? 0, 2) }}</span>
@@ -471,8 +471,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">Outstanding</p>
-                                <p class="text-xs text-gray-500">Pending payments</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('Outstanding') }}</p>
+                                <p class="text-xs text-gray-500">{{ __('Pending payments') }}</p>
                             </div>
                         </div>
                         <span class="text-lg font-semibold text-orange-600">AFN {{ number_format(($revenue ?? 0) * 0.1, 2) }}</span>
@@ -486,8 +486,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-900">This Month</p>
-                                <p class="text-xs text-gray-500">Current month payments</p>
+                                <p class="text-sm font-medium text-gray-900">{{ __('This Month') }}</p>
+                                <p class="text-xs text-gray-500">{{ __('Current month payments') }}</p>
                             </div>
                         </div>
                         <span class="text-lg font-semibold text-blue-600">AFN {{ number_format(($revenue ?? 0) * 0.3, 2) }}</span>
@@ -498,28 +498,28 @@
             <!-- Payment Methods -->
             <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Payment Methods</h3>
-                    <div class="text-sm text-gray-500">Distribution</div>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ __('Payment Methods') }}</h3>
+                    <div class="text-sm text-gray-500">{{ __('Distribution') }}</div>
                 </div>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            <span class="text-sm text-gray-600">Cash</span>
+                            <span class="text-sm text-gray-600">{{ __('Cash') }}</span>
                         </div>
                         <span class="text-sm font-semibold text-gray-900">65%</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                            <span class="text-sm text-gray-600">Bank Transfer</span>
+                            <span class="text-sm text-gray-600">{{ __('Bank Transfer') }}</span>
                         </div>
                         <span class="text-sm font-semibold text-gray-900">25%</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
-                            <span class="text-sm text-gray-600">Mobile Money</span>
+                            <span class="text-sm text-gray-600">{{ __('Mobile Money') }}</span>
                         </div>
                         <span class="text-sm font-semibold text-gray-900">10%</span>
                     </div>
@@ -536,7 +536,7 @@
 
         <!-- Quick Actions -->
         <div class="bg-white rounded-2xl p-6 border border-gray-200/60 shadow-lg">
-            <h3 class="text-xl font-semibold text-gray-900 mb-6">Quick Actions</h3>
+            <h3 class="text-xl font-semibold text-gray-900 mb-6">{{ __('Quick Actions') }}</h3>
             
             <!-- First Row - Core Actions -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
@@ -549,8 +549,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-blue-900 group-hover:text-blue-800">Add Customer</p>
-                            <p class="text-sm text-blue-700">New customer registration</p>
+                            <p class="font-semibold text-blue-900 group-hover:text-blue-800">{{ __('Add Customer') }}</p>
+                            <p class="text-sm text-blue-700">{{ __('New customer registration') }}</p>
                         </div>
                     </div>
                 </a>
@@ -564,8 +564,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-purple-900 group-hover:text-purple-800">Add Cloth</p>
-                            <p class="text-sm text-purple-700">New cloth measurement</p>
+                            <p class="font-semibold text-purple-900 group-hover:text-purple-800">{{ __('Add Cloth') }}</p>
+                            <p class="text-sm text-purple-700">{{ __('New cloth measurement') }}</p>
                         </div>
                     </div>
                 </a>
@@ -579,8 +579,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-indigo-900 group-hover:text-indigo-800">Add Vest</p>
-                            <p class="text-sm text-indigo-700">New vest measurement</p>
+                            <p class="font-semibold text-indigo-900 group-hover:text-indigo-800">{{ __('Add Vest') }}</p>
+                            <p class="text-sm text-indigo-700">{{ __('New vest measurement') }}</p>
                         </div>
                     </div>
                 </a>
@@ -594,8 +594,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-green-900 group-hover:text-green-800">Add Employee</p>
-                            <p class="text-sm text-green-700">New employee registration</p>
+                            <p class="font-semibold text-green-900 group-hover:text-green-800">{{ __('Add Employee') }}</p>
+                            <p class="text-sm text-green-700">{{ __('New employee registration') }}</p>
                         </div>
                     </div>
                 </a>
@@ -612,8 +612,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-orange-900 group-hover:text-orange-800">Assign Cloth</p>
-                            <p class="text-sm text-orange-700">Assign work to employees</p>
+                            <p class="font-semibold text-orange-900 group-hover:text-orange-800">{{ __('Assign Cloth') }}</p>
+                            <p class="text-sm text-orange-700">{{ __('Assign work to employees') }}</p>
                         </div>
                     </div>
                 </a>
@@ -627,8 +627,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-cyan-900 group-hover:text-cyan-800">Assign Vest</p>
-                            <p class="text-sm text-cyan-700">Assign work to employees</p>
+                            <p class="font-semibold text-cyan-900 group-hover:text-cyan-800">{{ __('Assign Vest') }}</p>
+                            <p class="text-sm text-cyan-700">{{ __('Assign work to employees') }}</p>
                         </div>
                     </div>
                 </a>
@@ -642,8 +642,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-emerald-900 group-hover:text-emerald-800">Record Payment</p>
-                            <p class="text-sm text-emerald-700">Add payment record</p>
+                            <p class="font-semibold text-emerald-900 group-hover:text-emerald-800">{{ __('Record Payment') }}</p>
+                            <p class="text-sm text-emerald-700">{{ __('Add payment record') }}</p>
                         </div>
                     </div>
                 </a>
@@ -657,8 +657,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-teal-900 group-hover:text-teal-800">View Payments</p>
-                            <p class="text-sm text-teal-700">Payment history</p>
+                            <p class="font-semibold text-teal-900 group-hover:text-teal-800">{{ __('View Payments') }}</p>
+                            <p class="text-sm text-teal-700">{{ __('Payment history') }}</p>
                         </div>
                     </div>
                 </a>
@@ -675,8 +675,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-yellow-900 group-hover:text-yellow-800">Pending Cloth</p>
-                            <p class="text-sm text-yellow-700">View pending work</p>
+                            <p class="font-semibold text-yellow-900 group-hover:text-yellow-800">{{ __('Pending Cloth') }}</p>
+                            <p class="text-sm text-yellow-700">{{ __('View pending work') }}</p>
                         </div>
                     </div>
                 </a>
@@ -690,8 +690,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-pink-900 group-hover:text-pink-800">Pending Vests</p>
-                            <p class="text-sm text-pink-700">View pending vests</p>
+                            <p class="font-semibold text-pink-900 group-hover:text-pink-800">{{ __('Pending Vests') }}</p>
+                            <p class="text-sm text-pink-700">{{ __('View pending vests') }}</p>
                         </div>
                     </div>
                 </a>
@@ -705,8 +705,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-violet-900 group-hover:text-violet-800">View Customers</p>
-                            <p class="text-sm text-violet-700">Customer directory</p>
+                            <p class="font-semibold text-violet-900 group-hover:text-violet-800">{{ __('View Customers') }}</p>
+                            <p class="text-sm text-violet-700">{{ __('Customer directory') }}</p>
                         </div>
                     </div>
                 </a>
@@ -720,8 +720,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-semibold text-rose-900 group-hover:text-rose-800">View Employees</p>
-                            <p class="text-sm text-rose-700">Employee directory</p>
+                            <p class="font-semibold text-rose-900 group-hover:text-rose-800">{{ __('View Employees') }}</p>
+                            <p class="text-sm text-rose-700">{{ __('Employee directory') }}</p>
                         </div>
                     </div>
                 </a>
@@ -741,7 +741,18 @@
     "cutterEmployees": {{ $cutterEmployees ?? 0 }},
     "salayeEmployees": {{ $salayeEmployees ?? 0 }},
     "pendingAssignments": {{ $pendingAssignments ?? 0 }},
-    "completedAssignments": {{ $completedAssignments ?? 0 }}
+    "completedAssignments": {{ $completedAssignments ?? 0 }},
+    "translations": {
+        "Cloth Orders": "{{ __('Cloth Orders') }}",
+        "Vest Orders": "{{ __('Vest Orders') }}",
+        "Cutters": "{{ __('Cutters') }}",
+        "Salaye Workers": "{{ __('Salaye Workers') }}",
+        "Pending": "{{ __('Pending') }}",
+        "Completed": "{{ __('Completed') }}",
+        "Cash": "{{ __('Cash') }}",
+        "Bank Transfer": "{{ __('Bank Transfer') }}",
+        "Mobile Money": "{{ __('Mobile Money') }}"
+    }
 }
 </script>
 <script>
@@ -850,7 +861,7 @@
         const ordersChart = new Chart(ordersCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Cloth Orders', 'Vest Orders'],
+                labels: [dashboardData.translations['Cloth Orders'], dashboardData.translations['Vest Orders']],
                 datasets: [{
                     data: [dashboardData.recentClothOrders, dashboardData.recentVestOrders],
                     backgroundColor: [
@@ -893,7 +904,7 @@
         const employeeChart = new Chart(employeeCtx, {
                         type: 'bar',
                         data: { 
-                labels: ['Cutters', 'Salaye Workers'],
+                labels: [dashboardData.translations['Cutters'] || 'Cutters', dashboardData.translations['Salaye Workers'] || 'Salaye Workers'],
                             datasets: [{
                     label: 'Employee Count',
                     data: [dashboardData.cutterEmployees, dashboardData.salayeEmployees],
@@ -949,7 +960,7 @@
         const assignmentChart = new Chart(assignmentCtx, {
                         type: 'doughnut',
                         data: { 
-                labels: ['Pending', 'Completed'],
+                labels: [dashboardData.translations['Pending'] || 'Pending', dashboardData.translations['Completed'] || 'Completed'],
                             datasets: [{ 
                     data: [dashboardData.pendingAssignments, dashboardData.completedAssignments],
                                 backgroundColor: [
@@ -992,7 +1003,7 @@
         const paymentChart = new Chart(paymentCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Cash', 'Bank Transfer', 'Mobile Money'],
+                labels: [dashboardData.translations['Cash'] || 'Cash', dashboardData.translations['Bank Transfer'] || 'Bank Transfer', dashboardData.translations['Mobile Money'] || 'Mobile Money'],
                 datasets: [{
                     data: [65, 25, 10],
                     backgroundColor: [

@@ -131,7 +131,7 @@
                                     </div>
                                 </div>
                                 <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Payment #{{ $payment->pay_id }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ __('Payment') }} #{{ $payment->pay_id }}</div>
                                     <div class="text-sm text-gray-500">{{ $payment->created_at->format('M d, Y') }}</div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($payment->employee)
                                 <div class="text-sm font-medium text-gray-900">{{ $payment->employee->emp_name }}</div>
-                                <div class="text-sm text-gray-500">Employee ID: {{ $payment->employee->emp_id }}</div>
+                                <div class="text-sm text-gray-500">{{ __('Employee ID') }}: {{ $payment->employee->emp_id }}</div>
                             @else
                                 <span class="text-gray-400">{{ __('Unknown Employee') }}</span>
                             @endif
@@ -187,7 +187,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" 
-                                            onclick="return confirm('Are you sure you want to delete this payment?')"
+                                            onclick="return confirm('{{ __('Are you sure you want to delete this payment?') }}')"
                                             class="text-red-600 hover:text-red-900 p-2 rounded-lg hover:bg-red-50 transition-colors duration-200">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>

@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Edit Selected Tailoring Orders')
+@section('title', __('Edit Selected Tailoring Orders'))
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4">
@@ -66,10 +66,10 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ $vest->customer->cus_name ?? 'N/A' }}
+                                    {{ $vest->customer->cus_name ?? __('N/A') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ $vest->customer->phone->pho_no ?? 'N/A' }}
+                                    {{ $vest->customer->phone->pho_no ?? __('N/A') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $vest->size === 'L' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
@@ -88,11 +88,11 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ $vest->formatted_order_date ?? 'N/A' }}
+                                    {{ $vest->formatted_order_date ?? __('N/A') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <span class="{{ $vest->is_overdue ? 'text-red-600 font-medium' : 'text-gray-900' }}">
-                                        {{ $vest->formatted_receive_date ?? 'N/A' }}
+                                        {{ $vest->formatted_receive_date ?? __('N/A') }}
                                         @if($vest->is_overdue)
                                             <span class="text-red-500 text-xs block">{{ __('Overdue') }}</span>
                                         @endif
@@ -911,7 +911,7 @@
         const countDisplay = document.getElementById('measurement-count');
         if (countDisplay) {
             if (currentMode === 'family') {
-                countDisplay.textContent = measurementCount + ' Family Members';
+                countDisplay.textContent = measurementCount + ' {{ __('Family Members') }}';
             } else {
                 countDisplay.textContent = measurementCount;
             }
@@ -965,7 +965,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-yellow-400 animate-pulse';
                 if (statusText) {
-                    statusText.textContent = 'Partial Payment';
+                    statusText.textContent = '{{ __('Partial Payment') }}';
                     statusText.className = 'text-sm font-medium text-yellow-700';
                 }
             } else if (remaining === 0 && total > 0) {
@@ -974,7 +974,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-green-500';
                 if (statusText) {
-                    statusText.textContent = 'Fully Paid';
+                    statusText.textContent = '{{ __('Fully Paid') }}';
                     statusText.className = 'text-sm font-medium text-green-700';
                 }
             } else if (remaining < 0) {
@@ -983,7 +983,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-blue-500';
                 if (statusText) {
-                    statusText.textContent = 'Overpaid';
+                    statusText.textContent = '{{ __('Overpaid') }}';
                     statusText.className = 'text-sm font-medium text-blue-700';
                 }
             } else {
@@ -991,7 +991,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-gray-400';
                 if (statusText) {
-                    statusText.textContent = 'No Payment';
+                    statusText.textContent = '{{ __('No Payment') }}';
                     statusText.className = 'text-sm font-medium text-gray-600';
                 }
             }
@@ -1250,7 +1250,7 @@
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    {{ __('Processing...') }}
+                    {{ __('Processing') }}...
                 `;
                 
                 setTimeout(() => {
@@ -1273,7 +1273,7 @@
         });
 
         // Initialize form
-        showAlert('{{ __("Vest form loaded successfully!") }}', 'success');
+        showAlert('{{ __('Vest form loaded successfully') }}!', 'success');
     });
 </script>
 @endsection

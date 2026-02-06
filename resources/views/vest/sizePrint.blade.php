@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vest Size Print - {{ $vest->V_M_ID }}</title>
+    <title>{{ __('Vest Size Print') }} - {{ $vest->V_M_ID }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @media print {
@@ -164,7 +164,7 @@
     <div class="row">
         <div class="col-12">
             <div class="col-sm-12">
-                <img src="{{ asset('image/logo.jpg') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
+                <img src="{{ asset('image/logo.png') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
                 <h1 style="font-family:'Times New Roman', Times, serif;" class="text-center"><b>شاهید خیاطی و رخت فروشی</b></h1>
                 <p class="font-17 text-black fw-bold text-center m-0" style="font-family:'Times New Roman', Times, serif;">
                     <span class="ri-whatsapp-line"></span><strong> +93784444247 </strong> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -183,7 +183,7 @@
                 <tr class="text-center text-black">
                     <td style="border-right:none;">{{ $vest->customer->cus_name }}</td>
                     <td class="border-white p-2">مشتری</td>
-                    <td class="border-white">{{ $vest->customer->phone->pho_no ?? 'N/A' }}</td>
+                    <td class="border-white">{{ $vest->customer->phone->pho_no ?? __('N/A') }}</td>
                     <td>شماره</td>
                 </tr>
                 <tr class="text-center">
@@ -253,7 +253,7 @@
                                 @endphp
                             @else
                                 <div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>
-                                <p style="margin-top: 5px; font-size: 12px; text-align: center;">N/A</p>
+                                <p style="margin-top: 5px; font-size: 12px; text-align: center;">{{ __('N/A') }}</p>
                             @endif
                         </div>
                     </td>
@@ -289,13 +289,13 @@
                                         $date1 = new DateTime($vest->O_date);
                                         $date2 = new DateTime($vest->R_date);
                                         $interval = $date1->diff($date2);
-                                        echo "--> " . $interval->format('%a days');
+                                        echo "--> " . $interval->format('%a') . ' {{ __('days') }}';
                                     } catch (\Exception $e) {
-                                        echo "--> 0 days";
+                                        echo "--> 0 {{ __('days') }}";
                                     }
                                 @endphp
                             @else
-                                {{ $vest->O_date ?? 'N/A' }}--{{ $vest->R_date ?? 'N/A' }}
+                                {{ $vest->O_date ?? __('N/A') }}--{{ $vest->R_date ?? __('N/A') }}
                             @endif
                         </span>
                         <span>تاریخ واپسی ـ</span>

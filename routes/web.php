@@ -105,19 +105,29 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('cloth-assignments', ClothAssignmentController::class);
     Route::patch('cloth-assignments/{clothAssignment}/complete', [ClothAssignmentController::class, 'markComplete'])
         ->name('cloth-assignments.complete');
-    
+    Route::get('cloth-assignments/edit-customer/{customer}', [ClothAssignmentController::class, 'editCustomerAssignments'])
+        ->name('cloth-assignments.edit-customer');
+    Route::patch('cloth-assignments/update-customer/{customer}', [ClothAssignmentController::class, 'updateCustomerAssignments'])
+        ->name('cloth-assignments.update-customer');
+    Route::delete('cloth-assignments/delete-assignment/{clothAssignment}', [ClothAssignmentController::class, 'deleteAssignment'])
+        ->name('cloth-assignments.delete-assignment');
+
     // Vest assignments
     Route::get('vest-assignments/pending', [VestAssignmentController::class, 'pending'])->name('vest-assignments.pending');
     Route::get('vest-assignments/complete', [VestAssignmentController::class, 'complete'])->name('vest-assignments.complete-view');
     Route::resource('vest-assignments', VestAssignmentController::class);
     Route::patch('vest-assignments/{vestAssignment}/complete', [VestAssignmentController::class, 'markComplete'])
         ->name('vest-assignments.complete');
+    Route::get('vest-assignments/edit-customer/{customer}', [VestAssignmentController::class, 'editCustomerAssignments'])
+        ->name('vest-assignments.edit-customer');
+    Route::patch('vest-assignments/update-customer/{customer}', [VestAssignmentController::class, 'updateCustomerAssignments'])
+        ->name('vest-assignments.update-customer');
+    Route::delete('vest-assignments/delete-assignment/{vestAssignment}', [VestAssignmentController::class, 'deleteAssignment'])
+        ->name('vest-assignments.delete-assignment');
     
     // Admin Status Management
     Route::get('admin/status', [App\Http\Controllers\AdminStatusController::class, 'index'])->name('admin.status.index');
-    Route::post('admin/status/search', [App\Http\Controllers\AdminStatusController::class, 'search'])->name('admin.status.search');
-    Route::patch('admin/status/update-cloth/{id}', [App\Http\Controllers\AdminStatusController::class, 'updateClothStatus'])->name('admin.status.update.cloth');
-    Route::patch('admin/status/update-vest/{id}', [App\Http\Controllers\AdminStatusController::class, 'updateVestStatus'])->name('admin.status.update.vest');
+    Route::patch('admin/status/update-assignment/{assignment}', [App\Http\Controllers\AdminStatusController::class, 'updateAssignmentStatus'])->name('admin.status.update.assignment');
 
     // Invoice management (admin only)
     Route::resource('invoices', InvoiceController::class);

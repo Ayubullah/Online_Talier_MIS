@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vest Invoice - {{ $invoiceId }}</title>
+    <title>{{ __('Vest Invoice') }} - {{ $invoiceId }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @media print {
@@ -161,7 +161,7 @@
 
 <div class="container m-0 p-0">
     <div class="container-fluid m-0 p-0">
-        <button class="btn btn-outline-primary btn-back d-print-none" onclick="history.back()">Back</button>
+        <button class="btn btn-outline-primary btn-back d-print-none" onclick="history.back()">{{ __('Back') }}</button>
 
         <!-- Start Vest invoice -->
         <div class="row">
@@ -172,7 +172,7 @@
                             <!-- Invoice Logo-->
                             <div class="clearfix">
                                 <div class="mt-1 text-black fw-bold">
-                                    <img src="{{ asset('image/logo.jpg') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
+                                    <img src="{{ asset('image/logo.png') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
                                     <h1 style="font-family:'Times New Roman', Times, serif;" class="text-center"><b>شاهید خیاطی و رخت فروشی</b></h1>
                                     <p class="font-17 text-black fw-bold text-center m-0" style="font-family:'Times New Roman', Times, serif;">
                                         <span class="ri-whatsapp-line"></span><strong> +93784444247 </strong> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -206,8 +206,8 @@
                                             <thead class="">
                                                 <tr>
                                                     <th colspan="7">
-                                                        <strong>Date :</strong> {{ $invoice->inc_date }}&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <strong>ID :</strong> {{ $invoiceId }}
+                                                        <strong>{{ __('Date') }}:</strong> {{ $invoice->inc_date }}&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <strong>{{ __('ID') }}:</strong> {{ $invoiceId }}
                                                     </th>
                                                     <th colspan="3" class="text-center barcode-container" style="padding: 5px; border: none !important; border-left: none !important; border-right: none !important; border-top: none !important; border-bottom: none !important; width: 100%; background: #f0f0f0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;">
                                                         <!-- Invoice ID Barcode - Full width -->
@@ -218,7 +218,7 @@
                                                                     // Display barcode with integrated text, full width
                                                                     echo $barcode->getBarcodeHTML((string)$invoiceId, 'C128', 3, 40, 'black', true);
                                                                 } catch (\Exception $e) {
-                                                                    echo '<div style="height: 50px; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;">Barcode: ' . htmlspecialchars($invoiceId) . '</div>';
+                                                                        echo '<div style="height: 50px; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;">' . __('Barcode') . ': ' . htmlspecialchars($invoiceId) . '</div>';
                                                                 }
                                                             @endphp
                                                         </div>
@@ -247,7 +247,7 @@
                                                     <td class="text-black">{{ $num }}</td>
                                                     <td class="text-black">{{ $vest->V_M_ID }}</td>
                                                     <td class="text-black">{{ $vest->customer->cus_name }}</td>
-                                                    <td class="text-black">{{ $vest->customer->phone->pho_no ?? 'N/A' }}</td>
+                                                    <td class="text-black">{{ $vest->customer->phone->pho_no ?? __('N/A') }}</td>
                                                     <td class="text-black">{{ $invoice->inc_date }}</td>
                                                     <td class="text-black">{{ $vest->vest_rate }}</td>
                                                     <td class="text-black">{{ $totalPaid }}</td>
@@ -286,15 +286,15 @@
                                             <table class="table-bordered table-group-divider">
                                                 <thead>
                                                     <tr>
-                                                        <th class='text-black'>Total</th>
+                                                        <th class='text-black'>{{ __('Total') }}</th>
                                                         <td class='text-black'><b>{{ $totalRate }}</b></td>
                                                     </tr>
                                                     <tr>
-                                                        <th class='text-black'>Discount:</th>
+                                                        <th class='text-black'>{{ __('Discount') }}:</th>
                                                         <td class="text-end text-black"><b>0</b></td>
                                                     </tr>
                                                     <tr>
-                                                        <th class='text-black'>Total Remain :</th>
+                                                        <th class='text-black'>{{ __('Total Remain') }}:</th>
                                                         <td class='text-black text-end'><b>{{ $totalRemain }}</b></td>
                                                     </tr>
                                                 </thead>
@@ -306,9 +306,9 @@
                                 <div class="col-8 col-lg-8">
                                     <div class="clearfix pt-3 text-black fw-bold">
                                         <small class="text-black">
-                                            Total Amount is : <b>{{ ucwords(\Illuminate\Support\Str::title(number_to_words($totalRate))) }}</b><br>
+                                            {{ __('Total Amount is') }}: <b>{{ ucwords(\Illuminate\Support\Str::title(number_to_words($totalRate))) }}</b><br>
                                             <small>
-                                                Note: If a Bill Paper Is Lost, It Will Not Be Returned.<br>
+                                                {{ __('Note: If a Bill Paper Is Lost, It Will Not Be Returned.') }}<br>
                                             </small>
                                         </small>
                                     </div>
@@ -323,7 +323,7 @@
                                 <div class="col-12">
                                     <div class="col-sm-12">
                                         <div class="mt-1 text-black fw-bold">
-                                            <img src="{{ asset('image/logo.jpg') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
+                                            <img src="{{ asset('image/logo.png') }}" alt="logo" width="97px" style="margin-top: -20px; margin-bottom:-118px">
                                             <h1 style="font-family:'Times New Roman', Times, serif;" class="text-center"><b>شاهید خیاطی و رخت فروشی</b></h1>
                                             <p class="font-17 text-black fw-bold text-center m-0" style="font-family:'Times New Roman', Times, serif;">
                                                 <span class="ri-whatsapp-line"></span><strong> +93784444247 </strong> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -344,7 +344,7 @@
                                         <tr class="text-center text-black">
                                             <td style="border-right:none;">{{ $vest->customer->cus_name }}</td>
                                             <td class="border-white p-2">مشتری</td>
-                                            <td class="border-white">{{ $vest->customer->phone->pho_no ?? 'N/A' }}</td>
+                                            <td class="border-white">{{ $vest->customer->phone->pho_no ?? __('N/A') }}</td>
                                             <td>شماره</td>
                                         </tr>
                                         <tr class="text-center">
@@ -426,7 +426,7 @@
                                                         @endphp
                                                     @else
                                                         <div style="height: 30px; width: 100%; background: repeating-linear-gradient(90deg, #000 0px, #000 2px, #fff 2px, #fff 4px); -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 auto;"></div>
-                                                        <p style="margin-top: 5px; font-size: 12px; text-align: center;">N/A</p>
+                                                        <p style="margin-top: 5px; font-size: 12px; text-align: center;">{{ __('N/A') }}</p>
                                                     @endif
                                                 </div>
                                             </td>
@@ -461,9 +461,9 @@
                                                             $date1 = new DateTime($invoice->inc_date);
                                                             $date2 = new DateTime($vest->R_date);
                                                             $interval = $date1->diff($date2);
-                                                            echo "--> " . $interval->format('%a days');
+                                                            echo "--> " . $interval->format('%a') . ' {{ __('days') }}';
                                                         } catch (\Exception $e) {
-                                                            echo "--> 0 days";
+                                                            echo "--> 0 {{ __('days') }}";
                                                         }
                                                     @endphp
                                                 </span>
@@ -479,8 +479,8 @@
 
                         @else
                             <h1 class='text-center text-danger'>
-                                No Invoice Record found!<br>
-                                Please Enter the Record
+                                {{ __('No Invoice Record found!') }}<br>
+                                {{ __('Please Enter the Record') }}
                             </h1>
                         @endif
                     </div>

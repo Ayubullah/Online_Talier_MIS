@@ -44,7 +44,7 @@
                 <div>
                     <p class="text-green-100 text-sm font-medium">{{ __('Total Employee Payments') }}</p>
                     <p class="text-3xl font-bold">{{ number_format($summary['total_employee_payments'], 2) }} AFN</p>
-                    <p class="text-green-100 text-xs mt-1">{{ $summary['employee_payment_count'] }} payments</p>
+                    <p class="text-green-100 text-xs mt-1">{{ $summary['employee_payment_count'] }} {{ __('payments') }}</p>
                 </div>
                 <div class="bg-white/20 rounded-xl p-3">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,7 +60,7 @@
                 <div>
                     <p class="text-blue-100 text-sm font-medium">{{ __('Total Customer Payments') }}</p>
                     <p class="text-3xl font-bold">{{ number_format($summary['total_customer_payments'], 2) }} AFN</p>
-                    <p class="text-blue-100 text-xs mt-1">{{ $summary['customer_payment_count'] }} payments</p>
+                    <p class="text-blue-100 text-xs mt-1">{{ $summary['customer_payment_count'] }} {{ __('payments') }}</p>
                 </div>
                 <div class="bg-white/20 rounded-xl p-3">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,7 +76,7 @@
                 <div>
                     <p class="text-purple-100 text-sm font-medium">{{ __('Total Customer Orders') }}</p>
                     <p class="text-3xl font-bold">{{ number_format($summary['total_customer_orders'], 2) }} AFN</p>
-                    <p class="text-purple-100 text-xs mt-1">{{ $customerBalances->count() }} customers</p>
+                    <p class="text-purple-100 text-xs mt-1">{{ $customerBalances->count() }} {{ __('customers') }}</p>
                 </div>
                 <div class="bg-white/20 rounded-xl p-3">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@
                 <div>
                     <p class="text-orange-100 text-sm font-medium">{{ __('Remaining Balance') }}</p>
                     <p class="text-3xl font-bold">{{ number_format($summary['total_remaining_balance'], 2) }} AFN</p>
-                    <p class="text-orange-100 text-xs mt-1">{{ $summary['customers_with_balance'] }} customers</p>
+                    <p class="text-orange-100 text-xs mt-1">{{ $summary['customers_with_balance'] }} {{ __('customers') }}</p>
                 </div>
                 <div class="bg-white/20 rounded-xl p-3">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">

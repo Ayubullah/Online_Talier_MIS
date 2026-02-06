@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Add New Vest Order')
+@section('title', __('Add New Vest Order'))
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4">
@@ -572,7 +572,7 @@
         const countDisplay = document.getElementById('measurement-count');
         if (countDisplay) {
             if (currentMode === 'family') {
-                countDisplay.textContent = measurementCount + ' Family Members';
+                countDisplay.textContent = measurementCount + ' {{ __('Family Members') }}';
             } else {
                 countDisplay.textContent = measurementCount;
             }
@@ -626,7 +626,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-yellow-400 animate-pulse';
                 if (statusText) {
-                    statusText.textContent = 'Partial Payment';
+                    statusText.textContent = '{{ __('Partial Payment') }}';
                     statusText.className = 'text-sm font-medium text-yellow-700';
                 }
             } else if (remaining === 0 && total > 0) {
@@ -635,7 +635,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-green-500';
                 if (statusText) {
-                    statusText.textContent = 'Fully Paid';
+                    statusText.textContent = '{{ __('Fully Paid') }}';
                     statusText.className = 'text-sm font-medium text-green-700';
                 }
             } else if (remaining < 0) {
@@ -644,7 +644,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-blue-500';
                 if (statusText) {
-                    statusText.textContent = 'Overpaid';
+                    statusText.textContent = '{{ __('Overpaid') }}';
                     statusText.className = 'text-sm font-medium text-blue-700';
                 }
             } else {
@@ -652,7 +652,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-gray-400';
                 if (statusText) {
-                    statusText.textContent = 'No Payment';
+                    statusText.textContent = '{{ __('No Payment') }}';
                     statusText.className = 'text-sm font-medium text-gray-600';
                 }
             }
@@ -809,7 +809,7 @@
             
             if (!isValid) {
                 e.preventDefault();
-                showAlert('Please fill in all required fields', 'error');
+                showAlert('{{ __('Please fill in all required fields') }}', 'error');
                 const firstInvalid = form.querySelector('.border-red-400');
                 if (firstInvalid) {
                     firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -839,16 +839,16 @@
                         messageDiv.innerHTML = '';
                         e.target.classList.remove('border-red-400', 'border-orange-400', 'border-purple-400');
                     } else if (value.length < 10) {
-                        messageDiv.innerHTML = '<span class="text-red-500 text-sm flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>Invalid phone number</span>';
+                        messageDiv.innerHTML = '<span class="text-red-500 text-sm flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>{{ __('Invalid phone number') }}</span>';
                         e.target.classList.add('border-red-400');
                         e.target.classList.remove('border-orange-400', 'border-purple-400');
                     } else {
                         if (e.target.id === 'family-phone') {
-                            messageDiv.innerHTML = '<span class="text-purple-500 text-sm flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Valid family phone number</span>';
+                            messageDiv.innerHTML = '<span class="text-purple-500 text-sm flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('Valid family phone number') }}</span>';
                             e.target.classList.remove('border-red-400');
                             e.target.classList.add('border-purple-400');
                         } else {
-                            messageDiv.innerHTML = '<span class="text-orange-500 text-sm flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Valid phone number</span>';
+                            messageDiv.innerHTML = '<span class="text-orange-500 text-sm flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('Valid phone number') }}</span>';
                             e.target.classList.remove('border-red-400');
                             e.target.classList.add('border-orange-400');
                         }

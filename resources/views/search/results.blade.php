@@ -73,15 +73,15 @@
                                 </div>
                                 <div>
                                     <h2 class="text-2xl font-bold">{{ $customer->cus_name }}</h2>
-                                    <p class="text-emerald-100">{{ $customer->phone ? $customer->phone->pho_no : 'No phone' }}</p>
+                                    <p class="text-emerald-100">{{ $customer->phone ? $customer->phone->pho_no : __('No phone') }}</p>
                                     @if($customer->invoice)
-                                        <p class="text-emerald-100 text-sm">Invoice #{{ $customer->invoice->inc_id }}</p>
+                                        <p class="text-emerald-100 text-sm">{{ __('Invoice') }} #{{ $customer->invoice->inc_id }}</p>
                                     @endif
                                 </div>
                             </div>
                             <div class="text-right">
                                 <div class="text-3xl font-bold">AFN {{ number_format($remainingBalance, 2) }}</div>
-                                <div class="text-emerald-100">{{ $remainingBalance > 0 ? 'Outstanding Balance' : 'Fully Paid' }}</div>
+                                <div class="text-emerald-100">{{ $remainingBalance > 0 ? __('Outstanding Balance') : __('Fully Paid') }}</div>
                             </div>
                         </div>
                     </div>
@@ -91,19 +91,19 @@
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                             <div class="text-center p-6 bg-blue-50 rounded-xl">
                                 <div class="text-2xl font-bold text-blue-600">AFN {{ number_format($totalOrderValue, 2) }}</div>
-                                <div class="text-sm text-gray-600">Total Order Value</div>
+                                <div class="text-sm text-gray-600">{{ __('Total Order Value') }}</div>
                             </div>
                             <div class="text-center p-6 bg-green-50 rounded-xl">
                                 <div class="text-2xl font-bold text-green-600">AFN {{ number_format($totalPaid, 2) }}</div>
-                                <div class="text-sm text-gray-600">Total Paid</div>
+                                <div class="text-sm text-gray-600">{{ __('Total Paid') }}</div>
                             </div>
                             <div class="text-center p-6 bg-purple-50 rounded-xl">
                                 <div class="text-2xl font-bold text-purple-600">{{ $totalOrders }}</div>
-                                <div class="text-sm text-gray-600">Total Orders</div>
+                                <div class="text-sm text-gray-600">{{ __('Total Orders') }}</div>
                             </div>
                             <div class="text-center p-6 bg-orange-50 rounded-xl">
                                 <div class="text-2xl font-bold text-orange-600">{{ $pendingOrders }}</div>
-                                <div class="text-sm text-gray-600">Pending Orders</div>
+                                <div class="text-sm text-gray-600">{{ __('Pending Orders') }}</div>
                             </div>
                         </div>
                         

@@ -2,7 +2,7 @@
 
 
 
-@section('title', 'Customer Details - Phone: ' . $phoneNumber)
+@section('title', __('Customer Details') . ' - ' . __('Phone') . ': ' . $phoneNumber)
 
 
 
@@ -32,15 +32,15 @@
 
                     <div>
 
-                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Phone: {{ $phoneNumber }}</h1>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ __('Phone') }}: {{ $phoneNumber }}</h1>
 
                         <div class="flex items-center space-x-4">
 
-                            <span class="text-gray-500">{{ $customers->count() }} Customer(s) Found</span>
+                            <span class="text-gray-500">{{ $customers->count() }} {{ __('Customer(s) Found') }}</span>
 
                             @if($primaryCustomer->phone)
 
-                                <span class="text-gray-500">Phone: {{ $primaryCustomer->phone->pho_no }}</span>
+                                <span class="text-gray-500">{{ __('Phone') }}: {{ $primaryCustomer->phone->pho_no }}</span>
 
                             @endif
 
@@ -468,9 +468,9 @@
 
                                 <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">{{ $customer->cus_id }}</td>
 
-                                <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{{ $customer->phone ? $customer->phone->pho_no : 'No phone' }}</td>
+                                <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{{ $customer->phone ? $customer->phone->pho_no : __('No phone') }}</td>
 
-                                <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{{ $customer->invoice ? $customer->invoice->inc_id : 'No invoice' }}</td>
+                                <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-900">{{ $customer->invoice ? $customer->invoice->inc_id : __('No invoice') }}</td>
 
                                 <td class="px-3 py-2 whitespace-nowrap text-sm text-center">
 
@@ -734,11 +734,11 @@
                             <div class="flex items-center justify-between mb-4">
                                 <h4 class="text-md font-semibold text-gray-800">{{ __('All Cloth Orders') }} ({{ $allClothOrders->count() }})</h4>
                                 <div class="flex items-center space-x-2">
-                                    <input type="text" id="clothSearchInput" placeholder="Search by ID..." 
+                                    <input type="text" id="clothSearchInput" placeholder="{{ __('Search by ID') }}..." 
                                            class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                     <button type="button" onclick="clearClothSearch()" 
                                             class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
-                                        Clear
+                                        {{ __('Clear') }}
                                     </button>
                                 </div>
                             </div>
@@ -753,15 +753,15 @@
                                                 <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     <input type="checkbox" id="selectAllCloth" class="rounded border-gray-300 text-blue-600 shadow-sm">
                                                 </th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order Date</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delivery Date</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Days</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('ID') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Customer') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Size') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Rate') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Status') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Order Date') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Delivery Date') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Days') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Details') }}</th>
                                             </tr>
                                         </thead>
 
@@ -790,7 +790,7 @@
                                                     {{ $order->created_at->format('M d, Y') }}
                                                 </td>
                                                 <td class="px-6 py-4 text-sm text-gray-500">
-                                                    {{ $order->R_date ? $order->R_date->format('M d, Y') : 'Not set' }}
+                                                    {{ $order->R_date ? $order->R_date->format('M d, Y') : __('Not set') }}
                                                 </td>
                                                 <td class="px-6 py-4 text-sm text-gray-500">
                                                     @if($order->R_date)
@@ -813,7 +813,7 @@
                                                 <td class="px-6 py-4 text-sm text-gray-500">
                                                     <button type="button" onclick="showClothDetails({{ $order->cm_id }})"
                                                             class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
-                                                        View
+                                                        {{ __('View') }}
                                                     </button>
                                                 </td>
                                             </tr>
@@ -823,7 +823,7 @@
                                 </div>
 
                                 <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded">
-                                    Send Selected Cloths
+                                    {{ __('Send Selected Cloths') }}
                                 </button>
                             </form>
                         </div>
@@ -866,11 +866,11 @@
                             <div class="flex items-center justify-between mb-4">
                                 <h4 class="text-md font-semibold text-gray-800">{{ __('All Vest Orders') }} ({{ $allVestOrders->count() }})</h4>
                                 <div class="flex items-center space-x-2">
-                                    <input type="text" id="vestSearchInput" placeholder="Search by ID..." 
+                                    <input type="text" id="vestSearchInput" placeholder="{{ __('Search by ID') }}..." 
                                            class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
                                     <button type="button" onclick="clearVestSearch()" 
                                             class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
-                                        Clear
+                                        {{ __('Clear') }}
                                     </button>
                                 </div>
                             </div>
@@ -886,15 +886,15 @@
                                                     <input type="checkbox" id="selectAllVest"
                                                         class="rounded border-gray-300 text-blue-600 shadow-sm">
                                                 </th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order Date</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delivery Date</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Days</th>
-                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('ID') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Customer') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Size') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Rate') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Status') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Order Date') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Delivery Date') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Days') }}</th>
+                                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Details') }}</th>
                                             </tr>
                                         </thead>
 
@@ -920,10 +920,10 @@
                                                     </span>
                                                 </td>
                                                 <td class="px-6 py-4 text-sm text-gray-500">
-                                                    {{ $order->O_date ? \Carbon\Carbon::parse($order->O_date)->format('M d, Y') : 'N/A' }}
+                                                    {{ $order->O_date ? \Carbon\Carbon::parse($order->O_date)->format('M d, Y') : __('N/A') }}
                                                 </td>
                                                 <td class="px-6 py-4 text-sm text-gray-500">
-                                                    {{ $order->R_date ? $order->R_date->format('M d, Y') : 'Not set' }}
+                                                    {{ $order->R_date ? $order->R_date->format('M d, Y') : __('Not set') }}
                                                 </td>
                                                 <td class="px-6 py-4 text-sm text-gray-500">
                                                     @if($order->R_date && $order->O_date)
@@ -946,7 +946,7 @@
                                                 <td class="px-6 py-4 text-sm text-gray-500">
                                                     <button type="button" onclick="showVestDetails({{ $order->V_M_ID }})"
                                                             class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">
-                                                        View
+                                                        {{ __('View') }}
                                                     </button>
                                                 </td>
                                             </tr>
@@ -956,7 +956,7 @@
                                 </div>
 
                                 <button type="submit" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded">
-                                    Send Selected Vests
+                                    {{ __('Send Selected Vests') }}
                                 </button>
                             </form>
                         </div>
@@ -1145,7 +1145,7 @@
 
                             <p class="text-sm font-medium text-gray-900">
 
-                                {{ __('New order') }} - {{ $order->order_type == 'cloth' ? 'Cloth' : 'Vest' }} ({{ $order->size }}) - {{ $order->customer_name }}
+                                {{ __('New order') }} - {{ $order->order_type == 'cloth' ? __('Cloth') : __('Vest') }} ({{ $order->size }}) - {{ $order->customer_name }}
 
                             </p>
 
@@ -1241,9 +1241,9 @@
 
                         <div>
 
-                            <h3 class="text-2xl font-bold" id="modalTitle">Measurement Details</h3>
+                            <h3 class="text-2xl font-bold" id="modalTitle">{{ __('Measurement Details') }}</h3>
 
-                            <p class="text-blue-100 text-sm">Complete measurement information</p>
+                            <p class="text-blue-100 text-sm">{{ __('Complete measurement information') }}</p>
 
                         </div>
 
@@ -1277,9 +1277,9 @@
 
                     </div>
 
-                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Loading Details</h3>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">{{ __('Loading Details') }}</h3>
 
-                    <p class="text-gray-500">Please wait while we fetch the measurement information...</p>
+                    <p class="text-gray-500">{{ __('Please wait while we fetch the measurement information') }}...</p>
 
                 </div>
 
@@ -1513,7 +1513,7 @@
 
     function showClothDetails(measurementId) {
 
-        document.getElementById('modalTitle').textContent = 'Cloth Measurement Details';
+        document.getElementById('modalTitle').textContent = '{{ __('Cloth Measurement Details') }}';
 
         document.getElementById('measurementModal').classList.remove('hidden');
 
@@ -1527,7 +1527,7 @@
 
                 <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
 
-                <p class="mt-2 text-gray-600">Loading cloth measurement details...</p>
+                <p class="mt-2 text-gray-600">{{ __('Loading cloth measurement details') }}...</p>
 
             </div>
 
@@ -1569,7 +1569,7 @@
 
     function showVestDetails(measurementId) {
 
-        document.getElementById('modalTitle').textContent = 'Vest Measurement Details';
+        document.getElementById('modalTitle').textContent = '{{ __('Vest Measurement Details') }}';
 
         document.getElementById('measurementModal').classList.remove('hidden');
 
@@ -1583,7 +1583,7 @@
 
                 <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
 
-                <p class="mt-2 text-gray-600">Loading vest measurement details...</p>
+                <p class="mt-2 text-gray-600">{{ __('Loading vest measurement details') }}...</p>
 
             </div>
 
@@ -1649,7 +1649,7 @@
 
                             <div>
 
-                                <h2 class="text-2xl font-bold text-gray-900">Cloth Measurement</h2>
+                                <h2 class="text-2xl font-bold text-gray-900">{{ __('Cloth Measurement') }}</h2>
 
                                 <p class="text-gray-600">ID: ${measurement.cm_id} • ${measurement.customer_name}</p>
 
@@ -1713,7 +1713,7 @@
 
                                     </svg>
 
-                                    Size
+                                    {{ __('Size') }}
 
                                 </span>
 
@@ -1731,7 +1731,7 @@
 
                                     </svg>
 
-                                    Rate
+                                    {{ __('Rate') }}
 
                                 </span>
 
@@ -1749,7 +1749,7 @@
 
                                     </svg>
 
-                                    Status
+                                    {{ __('Status') }}
 
                                 </span>
 
@@ -1795,7 +1795,7 @@
 
                             <div class="bg-gray-50 rounded-xl p-2">
 
-                                <div class="text-xs text-gray-500 mb-1">Chest</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ __('Chest') }}</div>
 
                                 <div class="font-semibold text-gray-900">${measurement.chati || 'N/A'}</div>
 
@@ -1803,7 +1803,7 @@
 
                             <div class="bg-gray-50 rounded-xl p-2">
 
-                                <div class="text-xs text-gray-500 mb-1">Sleeve</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ __('Sleeve') }}</div>
 
                                 <div class="font-semibold text-gray-900">${measurement.Sleeve || 'N/A'}</div>
 
@@ -1819,7 +1819,7 @@
 
                             <div class="bg-gray-50 rounded-xl p-2">
 
-                                <div class="text-xs text-gray-500 mb-1">Collar</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ __('Collar') }}</div>
 
                                 <div class="font-semibold text-gray-900">${measurement.Collar || 'N/A'}</div>
 
@@ -1865,7 +1865,7 @@
 
                         <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-3">
 
-                            <div class="text-sm text-orange-600 font-medium mb-1">Kaff</div>
+                            <div class="text-sm text-orange-600 font-medium mb-1">{{ __('Kaff') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.Kaff || 'N/A'}</div>
 
@@ -1873,7 +1873,7 @@
 
                         <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-3">
 
-                            <div class="text-sm text-orange-600 font-medium mb-1">Sleeve Type</div>
+                            <div class="text-sm text-orange-600 font-medium mb-1">{{ __('Sleeve Type') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.sleeve_type || 'N/A'}</div>
 
@@ -1881,7 +1881,7 @@
 
                         <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-3">
 
-                            <div class="text-sm text-orange-600 font-medium mb-1">Kalar</div>
+                            <div class="text-sm text-orange-600 font-medium mb-1">{{ __('Kalar') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.Kalar || 'N/A'}</div>
 
@@ -1889,7 +1889,7 @@
 
                         <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-3">
 
-                            <div class="text-sm text-orange-600 font-medium mb-1">Shalwar</div>
+                            <div class="text-sm text-orange-600 font-medium mb-1">{{ __('Shalwar') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.Shalwar || 'N/A'}</div>
 
@@ -1897,7 +1897,7 @@
 
                         <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-3">
 
-                            <div class="text-sm text-orange-600 font-medium mb-1">Daman</div>
+                            <div class="text-sm text-orange-600 font-medium mb-1">{{ __('Daman') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.Daman || 'N/A'}</div>
 
@@ -1905,7 +1905,7 @@
 
                         <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-3">
 
-                            <div class="text-sm text-orange-600 font-medium mb-1">Jeb</div>
+                            <div class="text-sm text-orange-600 font-medium mb-1">{{ __('Jeb') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.Jeb || 'N/A'}</div>
 
@@ -2065,7 +2065,7 @@
 
                             <div>
 
-                                <h2 class="text-2xl font-bold text-gray-900">Vest Measurement</h2>
+                                <h2 class="text-2xl font-bold text-gray-900">{{ __('Vest Measurement') }}</h2>
 
                                 <p class="text-gray-600">ID: ${measurement.V_M_ID} • ${measurement.customer_name}</p>
 
@@ -2129,7 +2129,7 @@
 
                                     </svg>
 
-                                    Size
+                                    {{ __('Size') }}
 
                                 </span>
 
@@ -2147,7 +2147,7 @@
 
                                     </svg>
 
-                                    Rate
+                                    {{ __('Rate') }}
 
                                 </span>
 
@@ -2165,7 +2165,7 @@
 
                                     </svg>
 
-                                    Status
+                                    {{ __('Status') }}
 
                                 </span>
 
@@ -2227,7 +2227,7 @@
 
                             <div class="bg-gray-50 rounded-xl p-2">
 
-                                <div class="text-xs text-gray-500 mb-1">Waist</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ __('Waist') }}</div>
 
                                 <div class="font-semibold text-gray-900">${measurement.Waist || 'N/A'}</div>
 
@@ -2235,7 +2235,7 @@
 
                             <div class="bg-gray-50 rounded-xl p-2">
 
-                                <div class="text-xs text-gray-500 mb-1">Shana</div>
+                                <div class="text-xs text-gray-500 mb-1">{{ __('Shana') }}</div>
 
                                 <div class="font-semibold text-gray-900">${measurement.Shana || 'N/A'}</div>
 
@@ -2281,7 +2281,7 @@
 
                         <div class="bg-gradient-to-r from-pink-50 to-rose-50 border border-pink-200 rounded-xl p-4">
 
-                            <div class="text-sm text-pink-600 font-medium mb-1">Daman</div>
+                            <div class="text-sm text-pink-600 font-medium mb-1">{{ __('Daman') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.Daman || 'N/A'}</div>
 
@@ -2289,7 +2289,7 @@
 
                         <div class="bg-gradient-to-r from-pink-50 to-rose-50 border border-pink-200 rounded-xl p-4">
 
-                            <div class="text-sm text-pink-600 font-medium mb-1">Nawa Waskat</div>
+                            <div class="text-sm text-pink-600 font-medium mb-1">{{ __('Nawa Waskat') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.NawaWaskat || 'N/A'}</div>
 
@@ -2297,7 +2297,7 @@
 
                         <div class="bg-gradient-to-r from-pink-50 to-rose-50 border border-pink-200 rounded-xl p-4">
 
-                            <div class="text-sm text-pink-600 font-medium mb-1">Vest Type</div>
+                            <div class="text-sm text-pink-600 font-medium mb-1">{{ __('Vest Type') }}</div>
 
                             <div class="text-gray-900 font-semibold">${measurement.Vest_Type || 'N/A'}</div>
 
@@ -2447,7 +2447,7 @@
 
                 </div>
 
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Oops! Something went wrong</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">{{ __('Oops! Something went wrong') }}</h3>
 
                 <p class="text-gray-600 text-lg mb-6">${message}</p>
 
@@ -2461,7 +2461,7 @@
 
                     </svg>
 
-                    Close
+                    {{ __('Close') }}
 
                 </button>
 

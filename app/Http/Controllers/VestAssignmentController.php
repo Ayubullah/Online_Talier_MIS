@@ -314,4 +314,77 @@ class VestAssignmentController extends Controller
         return redirect()->route('vest-assignments.show', $vestAssignment)
             ->with('success', 'Vest assignment marked as complete.');
     }
+
+    /**
+     * Show form for editing customer assignments.
+     */
+    public function editCustomerAssignments(Customer $customer)
+    {
+        // Get all vest measurements for this customer that have assignments
+        $vestMeasurements = $customer->vestMeasurements()
+            ->with(['clothAssignments.employee'])
+            ->whereHas('clothAssignments')
+            ->get();
+
+        $employees = Employee::all();
+
+        return view('vest-assignments.edit-customer', compact('customer', 'vestMeasurements', 'employees'));
+    }
+
+    /**
+     * Update customer assignments.
+     */
+    public function updateCustomerAssignments(Request $request, Customer $customer)
+    {
+        $request->validate([
+            'assignments' => 'required|array',
+            'assignments.*.status' => 'required|in:pending,completed',
+            'assignments.*.F_emp_id' => 'nullable|exists:employee,emp_id',
+        ]);
+
+        try {
+            foreach ($request->assignments as $assignmentId => $assignmentData) {
+                $assignment = ClothAssignment::find($assignmentId);
+
+                if ($assignment) {
+                    $updateData = [
+                        'status' => $assignmentData['status'],
+                    ];
+
+                    // Only update employee if provided and not empty
+                    if (!empty($assignmentData['F_emp_id'])) {
+                        $updateData['F_emp_id'] = $assignmentData['F_emp_id'];
+                    }
+
+                    $assignment->update($updateData);
+                }
+            }
+
+            return redirect()->route('vest-assignments.complete-view')
+                ->with('success', 'Vest assignments updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Failed to update assignments: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    /**
+     * Delete a specific assignment.
+     */
+    public function deleteAssignment(ClothAssignment $vestAssignment)
+    {
+        try {
+            // Get customer ID before deleting for redirect
+            $customerId = $vestAssignment->vestMeasurement->customer_id;
+
+            $vestAssignment->delete();
+
+            return redirect()->route('vest-assignments.edit-customer', $customerId)
+                ->with('success', ucfirst($vestAssignment->work_type) . ' assignment deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Failed to delete assignment: ' . $e->getMessage());
+        }
+    }
 }

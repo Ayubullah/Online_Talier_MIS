@@ -111,6 +111,79 @@ class ClothAssignmentController extends Controller
     }
 
     /**
+     * Show form for editing customer assignments.
+     */
+    public function editCustomerAssignments(Customer $customer)
+    {
+        // Get all cloth measurements for this customer that have assignments
+        $clothMeasurements = $customer->clothMeasurements()
+            ->with(['clothAssignments.employee'])
+            ->whereHas('clothAssignments')
+            ->get();
+
+        $employees = Employee::all();
+
+        return view('cloth-assignments.edit-customer', compact('customer', 'clothMeasurements', 'employees'));
+    }
+
+    /**
+     * Update customer assignments.
+     */
+    public function updateCustomerAssignments(Request $request, Customer $customer)
+    {
+        $request->validate([
+            'assignments' => 'required|array',
+            'assignments.*.status' => 'required|in:pending,complete',
+            'assignments.*.F_emp_id' => 'nullable|exists:employee,emp_id',
+        ]);
+
+        try {
+            foreach ($request->assignments as $assignmentId => $assignmentData) {
+                $assignment = ClothAssignment::find($assignmentId);
+
+                if ($assignment) {
+                    $updateData = [
+                        'status' => $assignmentData['status'],
+                    ];
+
+                    // Only update employee if provided and not empty
+                    if (!empty($assignmentData['F_emp_id'])) {
+                        $updateData['F_emp_id'] = $assignmentData['F_emp_id'];
+                    }
+
+                    $assignment->update($updateData);
+                }
+            }
+
+            return redirect()->route('cloth-assignments.complete-view')
+                ->with('success', 'Assignments updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Failed to update assignments: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    /**
+     * Delete a specific assignment.
+     */
+    public function deleteAssignment(ClothAssignment $clothAssignment)
+    {
+        try {
+            // Get customer ID before deleting for redirect
+            $customerId = $clothAssignment->clothMeasurement->customer_id;
+
+            $clothAssignment->delete();
+
+            return redirect()->route('cloth-assignments.edit-customer', $customerId)
+                ->with('success', ucfirst($clothAssignment->work_type) . ' assignment deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Failed to delete assignment: ' . $e->getMessage());
+        }
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

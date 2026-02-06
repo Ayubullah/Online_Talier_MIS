@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Vest Order Details - ' . $vest->customer->cus_name)
+@section('title', __('Vest Order Details') . ' - ' . $vest->customer->cus_name)
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
@@ -9,7 +9,7 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
             <div class="mb-4 md:mb-0">
                 <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ __('Vest Order Details') }}</h1>
-                <p class="text-gray-600">{{ __('View detailed information about') }} {{ $vest->customer->cus_name }} {{ __('\'s vest order') }}</p>
+                <p class="text-gray-600">{{ __('View detailed information about') }} {{ $vest->customer->cus_name }}{{ __('\'s vest order') }}</p>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <a href="{{ route('vests.edit', $vest) }}"
@@ -76,7 +76,7 @@
 
                         <div class="flex items-center justify-between py-3 border-b border-gray-100">
                             <span class="text-sm font-medium text-gray-500">{{ __('Vest Type') }}</span>
-                            <span class="text-sm font-semibold text-gray-900">{{ $vest->Vest_Type ?? 'N/A' }}</span>
+                            <span class="text-sm font-semibold text-gray-900">{{ $vest->Vest_Type ?? __('N/A') }}</span>
                         </div>
 
                         <div class="flex items-center justify-between py-3 border-b border-gray-100">
@@ -106,35 +106,35 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('Height') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Height ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Height ?? __('N/A') }}</p>
                     </div>
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('Shoulder') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Shoulder ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Shoulder ?? __('N/A') }}</p>
                     </div>
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('Armpit') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Armpit ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Armpit ?? __('N/A') }}</p>
                     </div>
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('Waist') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Waist ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Waist ?? __('N/A') }}</p>
                     </div>
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('Shana') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Shana ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Shana ?? __('N/A') }}</p>
                     </div>
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('Kalar') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Kalar ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Kalar ?? __('N/A') }}</p>
                     </div>
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('Daman') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Daman ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->Daman ?? __('N/A') }}</p>
                     </div>
                     <div class="text-center p-3 bg-gray-50 rounded-lg">
                         <p class="text-xs text-gray-500 mb-1">{{ __('NawaWaskat') }}</p>
-                        <p class="text-sm font-semibold text-gray-900">{{ $vest->NawaWaskat ?? 'N/A' }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $vest->NawaWaskat ?? __('N/A') }}</p>
                     </div>
                 </div>
             </div>
@@ -150,17 +150,17 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between py-3 border-b border-gray-100">
                         <span class="text-sm font-medium text-gray-500">{{ __('Order Date') }}</span>
-                        <span class="text-sm font-semibold text-gray-900">{{ $vest->O_date ? $vest->O_date->format('M d, Y') : 'N/A' }}</span>
+                        <span class="text-sm font-semibold text-gray-900">{{ $vest->O_date ? $vest->O_date->format('M d, Y') : __('N/A') }}</span>
                     </div>
 
                     <div class="flex items-center justify-between py-3 border-b border-gray-100">
                         <span class="text-sm font-medium text-gray-500">{{ __('Receive Date') }}</span>
-                        <span class="text-sm font-semibold text-gray-900">{{ $vest->R_date ? $vest->R_date->format('M d, Y') : 'N/A' }}</span>
+                        <span class="text-sm font-semibold text-gray-900">{{ $vest->R_date ? $vest->R_date->format('M d, Y') : __('N/A') }}</span>
                     </div>
 
                     <div class="flex items-center justify-between py-3">
                         <span class="text-sm font-medium text-gray-500">{{ __('Created At') }}</span>
-                        <span class="text-sm font-semibold text-gray-900">{{ $vest->created_at ? $vest->created_at->format('M d, Y H:i') : 'N/A' }}</span>
+                        <span class="text-sm font-semibold text-gray-900">{{ $vest->created_at ? $vest->created_at->format('M d, Y H:i') : __('N/A') }}</span>
                     </div>
                 </div>
             </div>
@@ -283,8 +283,8 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">{{ $assignment->employee->emp_name ?? 'Unknown Employee' }}</p>
-                                    <p class="text-sm text-gray-500">{{ $assignment->assigned_at ? $assignment->assigned_at->format('M d, Y') : 'N/A' }}</p>
+                                    <p class="text-sm font-medium text-gray-900">{{ $assignment->employee->emp_name ?? __('Unknown Employee') }}</p>
+                                    <p class="text-sm text-gray-500">{{ $assignment->assigned_at ? $assignment->assigned_at->format('M d, Y') : __('N/A') }}</p>
                                 </div>
                             </div>
                             <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full

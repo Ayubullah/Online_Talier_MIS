@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Edit Selected Tailoring Orders')
+@section('title', __('Edit Selected Tailoring Orders'))
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4">
@@ -10,7 +10,7 @@
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div>
                     <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                        {{ __('New Tailoring Order') }}
+                        {{ isset($selectedData) && $selectedData->count() > 0 ? __('Edit Selected Tailoring Orders') : __('New Tailoring Order') }}
                     </h1>
                     <p class="text-gray-600 text-lg">{{ __('Create a comprehensive tailoring order with measurements and details') }}</p>
                 </div>
@@ -66,10 +66,10 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ $cloth->customer->cus_name ?? 'N/A' }}
+                                    {{ $cloth->customer->cus_name ?? __('N/A') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ $cloth->customer->phone->pho_no ?? 'N/A' }}
+                                    {{ $cloth->customer->phone->pho_no ?? __('N/A') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $cloth->size === 'L' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
@@ -347,13 +347,13 @@
                         <!-- Add Measurement Button -->
                         <div class="flex items-center gap-4">
                             <div class="text-sm text-black">
-                                Total Measurements: <span id="measurement-count" class="font-semibold bg-white/20 px-2 py-1 rounded">1</span>
+                                {{ __('Total Measurements') }}: <span id="measurement-count" class="font-semibold bg-white/20 px-2 py-1 rounded">1</span>
                             </div>
                             <button type="button" id="add-measurement" class="px-4 py-2 bg-white text-emerald-600 rounded-lg hover:bg-emerald-50 transition-all duration-200 flex items-center gap-2 font-semibold shadow-lg hover:scale-105 active:scale-95">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                 </svg>
-                                <span>Add Measurement</span>
+                                <span>{{ __('Add Measurement') }}</span>
                             </button>
                         </div>
                     </div>
@@ -763,7 +763,7 @@
         const countDisplay = document.getElementById('measurement-count');
         if (countDisplay) {
             if (currentMode === 'family') {
-                countDisplay.textContent = measurementCount + ' Family Members';
+                countDisplay.textContent = measurementCount + ' {{ __('Family Members') }}';
             } else {
                 countDisplay.textContent = measurementCount;
             }
@@ -816,7 +816,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-yellow-400 animate-pulse';
                 if (statusText) {
-                    statusText.textContent = 'Partial Payment';
+                    statusText.textContent = '{{ __('Partial Payment') }}';
                     statusText.className = 'text-sm font-medium text-yellow-700';
                 }
             } else if (remaining === 0 && total > 0) {
@@ -825,7 +825,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-green-500';
                 if (statusText) {
-                    statusText.textContent = 'Fully Paid';
+                    statusText.textContent = '{{ __('Fully Paid') }}';
                     statusText.className = 'text-sm font-medium text-green-700';
                 }
             } else if (remaining < 0) {
@@ -834,7 +834,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-blue-500';
                 if (statusText) {
-                    statusText.textContent = 'Overpaid';
+                    statusText.textContent = '{{ __('Overpaid') }}';
                     statusText.className = 'text-sm font-medium text-blue-700';
                 }
             } else {
@@ -842,7 +842,7 @@
                 
                 if (statusIndicator) statusIndicator.className = 'w-3 h-3 rounded-full bg-gray-400';
                 if (statusText) {
-                    statusText.textContent = 'No Payment';
+                    statusText.textContent = '{{ __('No Payment') }}';
                     statusText.className = 'text-sm font-medium text-gray-600';
                 }
             }
@@ -1146,7 +1146,7 @@
         });
 
         // Initialize form
-        showAlert('{{ __("Form loaded successfully!") }}', 'success');
+        showAlert('{{ __('Form loaded successfully') }}!', 'success');
     });
 </script>
 @endsection

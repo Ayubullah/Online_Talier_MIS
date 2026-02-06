@@ -34,16 +34,16 @@
                     </div>
                     <div class="text-right">
                         <div class="text-3xl font-bold text-blue-700">{{ $statusCounts['total_assignments'] }}</div>
-                        <div class="text-sm font-medium text-blue-600">Total Assignments</div>
+                        <div class="text-sm font-medium text-blue-600">{{ __('Total Assignments') }}</div>
                     </div>
                 </div>
                 <div class="space-y-2">
                     <div class="flex justify-between text-sm">
-                        <span class="text-blue-700">Cloth:</span>
+                        <span class="text-blue-700">{{ __('Cloth') }}:</span>
                         <span class="font-semibold text-blue-800">{{ $statusCounts['cloth_assignments'] }}</span>
                     </div>
                     <div class="flex justify-between text-sm">
-                        <span class="text-blue-700">Vest:</span>
+                        <span class="text-blue-700">{{ __('Vest') }}:</span>
                         <span class="font-semibold text-blue-800">{{ $statusCounts['vest_assignments'] }}</span>
                     </div>
                 </div>
@@ -59,16 +59,16 @@
                     </div>
                     <div class="text-right">
                         <div class="text-3xl font-bold text-green-700">{{ $statusCounts['completed_assignments'] }}</div>
-                        <div class="text-sm font-medium text-green-600">Completed</div>
+                        <div class="text-sm font-medium text-green-600">{{ __('Completed') }}</div>
                     </div>
                 </div>
                 <div class="space-y-2">
                     <div class="flex justify-between text-sm">
-                        <span class="text-green-700">Cloth:</span>
+                        <span class="text-green-700">{{ __('Cloth') }}:</span>
                         <span class="font-semibold text-green-800">{{ $statusCounts['cloth_completed'] }}</span>
                     </div>
                     <div class="flex justify-between text-sm">
-                        <span class="text-green-700">Vest:</span>
+                        <span class="text-green-700">{{ __('Vest') }}:</span>
                         <span class="font-semibold text-green-800">{{ $statusCounts['vest_completed'] }}</span>
                     </div>
                 </div>
@@ -84,16 +84,16 @@
                     </div>
                     <div class="text-right">
                         <div class="text-3xl font-bold text-yellow-700">{{ $statusCounts['pending_assignments'] }}</div>
-                        <div class="text-sm font-medium text-yellow-600">Pending</div>
+                        <div class="text-sm font-medium text-yellow-600">{{ __('Pending') }}</div>
                     </div>
                 </div>
                 <div class="space-y-2">
                     <div class="flex justify-between text-sm">
-                        <span class="text-yellow-700">Cloth:</span>
+                        <span class="text-yellow-700">{{ __('Cloth') }}:</span>
                         <span class="font-semibold text-yellow-800">{{ $statusCounts['cloth_pending'] }}</span>
                     </div>
                     <div class="flex justify-between text-sm">
-                        <span class="text-yellow-700">Vest:</span>
+                        <span class="text-yellow-700">{{ __('Vest') }}:</span>
                         <span class="font-semibold text-yellow-800">{{ $statusCounts['vest_pending'] }}</span>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                             $completionRate = $statusCounts['total_assignments'] > 0 ? round(($statusCounts['completed_assignments'] / $statusCounts['total_assignments']) * 100, 1) : 0;
                         @endphp
                         <div class="text-3xl font-bold text-purple-700">{{ $completionRate }}%</div>
-                        <div class="text-sm font-medium text-purple-600">Completion Rate</div>
+                        <div class="text-sm font-medium text-purple-600">{{ __('Completion Rate') }}</div>
                     </div>
                 </div>
                 <div class="w-full bg-purple-200 rounded-full h-3">
@@ -130,70 +130,74 @@
                     </div>
                     <div class="text-right">
                         <div class="text-3xl font-bold text-teal-700">{{ $statusCounts['total_records'] }}</div>
-                        <div class="text-sm font-medium text-teal-600">Total Records</div>
+                        <div class="text-sm font-medium text-teal-600">{{ __('Total Records') }}</div>
                     </div>
                 </div>
                 <div class="space-y-2">
                     <div class="flex justify-between text-sm">
-                        <span class="text-teal-700">Cloth Records:</span>
+                        <span class="text-teal-700">{{ __('Cloth Records') }}:</span>
                         <span class="font-semibold text-teal-800">{{ $statusCounts['total_cloth_records'] }}</span>
                     </div>
                     <div class="flex justify-between text-sm">
-                        <span class="text-teal-700">Vest Records:</span>
+                        <span class="text-teal-700">{{ __('Vest Records') }}:</span>
                         <span class="font-semibold text-teal-800">{{ $statusCounts['total_vest_records'] }}</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Search Section -->
+        <!-- Real-time Search Section -->
         <div class="bg-white rounded-3xl shadow-2xl p-6 mb-8 border border-white/20">
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
                 <div>
-                    <h3 class="text-2xl font-bold text-gray-900">Search Assignments</h3>
-                    <p class="text-gray-600">Search by Assignment ID, Cloth ID, or Vest ID</p>
+                    <h3 class="text-2xl font-bold text-gray-900">{{ __('Search Assignments') }}</h3>
+                    <p class="text-gray-600">{{ __('Real-time search by Assignment ID, Cloth ID, or Vest ID') }}</p>
+                </div>
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl p-3 shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
                 </div>
             </div>
 
-            <form action="{{ route('admin.status.search') }}" method="POST" class="space-y-4">
-                @csrf
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex-1">
-                        <input type="text" 
-                               name="search_id" 
-                               value="{{ $searchTerm ?? '' }}"
-                               placeholder="Enter Assignment ID, Cloth ID, or Vest ID..." 
-                               class="w-full px-6 py-4 text-lg border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 shadow-lg"
-                               required>
-                    </div>
-                    <button type="submit" 
-                            class="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center gap-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="relative">
+                <input type="text"
+                       id="realtime-search"
+                       placeholder="{{ __('Type to search by Assignment ID, Cloth ID, or Vest ID...') }}"
+                       class="w-full px-6 py-4 pr-16 text-lg border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 shadow-lg"
+                       autocomplete="off">
+                <div class="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
+                    <button type="button"
+                            id="clear-search-btn"
+                            class="p-2 text-gray-400 hover:text-gray-600 transition-colors duration-200 opacity-0 invisible rounded-lg hover:bg-gray-100"
+                            title="Clear search">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <div class="w-6 h-6 text-gray-400">
+                        <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
-                        Search
-                    </button>
+                    </div>
                 </div>
-            </form>
+            </div>
 
-            @if(isset($searchTerm))
-                <div class="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
-                    <p class="text-blue-800">
-                        <strong>Search Results for:</strong> "{{ $searchTerm }}" 
-                        ({{ $assignments->total() }} {{ $assignments->total() == 1 ? 'result' : 'results' }} found)
-                    </p>
-                    <a href="{{ route('admin.status.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                        Clear Search & Show All
-                    </a>
-                </div>
-            @endif
+            <div id="search-results-info" class="hidden mt-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                <p class="text-blue-800">
+                    <strong id="results-count">0</strong> {{ __('assignments found matching your search') }}
+                    <span id="clear-search" class="text-blue-600 hover:text-blue-800 text-sm font-medium cursor-pointer ml-2">
+                        ({{ __('Clear search') }})
+                    </span>
+                </p>
+            </div>
         </div>
 
         <!-- Assignments Table -->
         <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/20">
             <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-6">
-                <h3 class="text-2xl font-bold text-white">All Assignments</h3>
-                <p class="text-indigo-100 mt-1">{{ $assignments->total() }} total assignments</p>
+                <h3 class="text-2xl font-bold text-white">{{ __('All Assignments') }}</h3>
+                <p class="text-indigo-100 mt-1">{{ $assignments->total() }} {{ __('total assignments') }}</p>
             </div>
 
             @if($assignments->count() > 0)
@@ -201,14 +205,14 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Measure ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Employee</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Work Type</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('ID') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Type') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Measure ID') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Customer') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Employee') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Work Type') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Status') }}</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -248,39 +252,25 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    @if($assignment->status == 'pending')
-                                        @if($assignment->assignment_type == 'cloth')
-                                            <form method="POST" action="{{ route('admin.status.update.cloth', $assignment->F_cm_id) }}" style="display: inline;">
-                                        @else
-                                            <form method="POST" action="{{ route('admin.status.update.vest', $assignment->F_vm_id) }}" style="display: inline;">
-                                        @endif
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="status" value="complete">
-                                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-200 flex items-center gap-2">
+                                    <div class="assignment-actions" data-assignment-id="{{ $assignment->ca_id }}" data-current-status="{{ $assignment->status }}">
+                                        @if($assignment->status == 'pending')
+                                            <button type="button" onclick="updateAssignmentStatus({{ $assignment->ca_id }}, 'complete')"
+                                                    class="status-update-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-200 flex items-center gap-2">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                                 </svg>
-                                                Mark Complete
+                                                {{ __('Mark Complete') }}
                                             </button>
-                                        </form>
-                                    @else
-                                        @if($assignment->assignment_type == 'cloth')
-                                            <form method="POST" action="{{ route('admin.status.update.cloth', $assignment->F_cm_id) }}" style="display: inline;">
                                         @else
-                                            <form method="POST" action="{{ route('admin.status.update.vest', $assignment->F_vm_id) }}" style="display: inline;">
-                                        @endif
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="hidden" name="status" value="pending">
-                                            <button type="submit" class="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-200 flex items-center gap-2">
+                                            <button type="button" onclick="updateAssignmentStatus({{ $assignment->ca_id }}, 'pending')"
+                                                    class="status-update-btn bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-200 flex items-center gap-2">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                                 </svg>
-                                                Mark Pending
+                                                {{ __('Mark Pending') }}
                                             </button>
-                                        </form>
-                                    @endif
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -299,12 +289,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-medium text-gray-900 mb-2">No Assignments Found</h3>
+                    <h3 class="text-xl font-medium text-gray-900 mb-2">{{ __('No Assignments Found') }}</h3>
                     <p class="text-gray-500">
                         @if(isset($searchTerm))
-                            No assignments found for "{{ $searchTerm }}". Try a different search term.
+                            {{ __('No assignments found for') }} "{{ $searchTerm }}". {{ __('Try a different search term.') }}
                         @else
-                            No assignments have been created yet.
+                            {{ __('No assignments have been created yet') }}
                         @endif
                     </p>
                 </div>
@@ -313,5 +303,235 @@
     </div>
 </div>
 
+@endsection
 
+@section('scripts')
+<script>
+    // Function to update assignment status via AJAX using pure JavaScript
+    function updateAssignmentStatus(assignmentId, newStatus) {
+        const actionContainer = document.querySelector(`[data-assignment-id="${assignmentId}"]`);
+        const button = actionContainer.querySelector('.status-update-btn');
+        const originalHtml = button.innerHTML;
+
+        // Disable button and show loading state
+        button.disabled = true;
+        button.innerHTML = `
+            <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            {{ __('Updating...') }}
+        `;
+
+        // Get CSRF token
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        // Make AJAX request using fetch
+        fetch(`/admin/status/update-assignment/${assignmentId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                status: newStatus
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the status badge
+                updateStatusBadge(assignmentId, newStatus);
+
+                // Update the button
+                updateActionButton(assignmentId, newStatus);
+
+                // Show success message
+                showMessage('success', data.message || '{{ __('Status updated successfully!') }}');
+            } else {
+                showMessage('error', data.message || '{{ __('Failed to update status') }}');
+                // Restore button
+                button.disabled = false;
+                button.innerHTML = originalHtml;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showMessage('error', '{{ __('An error occurred while updating the status') }}');
+            // Restore button
+            button.disabled = false;
+            button.innerHTML = originalHtml;
+        });
+    }
+
+    // Function to update the status badge
+    function updateStatusBadge(assignmentId, newStatus) {
+        const row = document.querySelector(`[data-assignment-id="${assignmentId}"]`).closest('tr');
+        const statusBadge = row.querySelector('.status-badge');
+
+        if (newStatus === 'complete') {
+            statusBadge.className = statusBadge.className.replace('bg-yellow-100 text-yellow-800', 'bg-green-100 text-green-800');
+            statusBadge.textContent = '{{ __('Complete') }}';
+        } else {
+            statusBadge.className = statusBadge.className.replace('bg-green-100 text-green-800', 'bg-yellow-100 text-yellow-800');
+            statusBadge.textContent = '{{ __('Pending') }}';
+        }
+    }
+
+    // Function to update the action button
+    function updateActionButton(assignmentId, newStatus) {
+        const actionContainer = document.querySelector(`[data-assignment-id="${assignmentId}"]`);
+        actionContainer.setAttribute('data-current-status', newStatus);
+
+        if (newStatus === 'pending') {
+            // Show "Mark Complete" button
+            actionContainer.innerHTML = `
+                <button type="button" onclick="updateAssignmentStatus(${assignmentId}, 'complete')"
+                        class="status-update-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-200 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    {{ __('Mark Complete') }}
+                </button>
+            `;
+        } else {
+            // Show "Mark Pending" button
+            actionContainer.innerHTML = `
+                <button type="button" onclick="updateAssignmentStatus(${assignmentId}, 'pending')"
+                        class="status-update-btn bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-200 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    {{ __('Mark Pending') }}
+                </button>
+            `;
+        }
+    }
+
+    // Function to show messages
+    function showMessage(type, message) {
+        // Remove any existing messages
+        const existingMessages = document.querySelectorAll('.message-alert');
+        existingMessages.forEach(msg => msg.remove());
+
+        // Create message element
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message-alert fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 ${
+            type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+        }`;
+
+        const iconPath = type === 'success'
+            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>'
+            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+
+        messageDiv.innerHTML = `
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    ${iconPath}
+                </svg>
+                <span>${message}</span>
+            </div>
+        `;
+
+        // Add to page
+        document.body.appendChild(messageDiv);
+
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.style.opacity = '0';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }
+        }, 3000);
+    }
+
+    // Real-time search functionality using pure JavaScript
+    function performSearch() {
+        const searchTerm = document.getElementById('realtime-search').value.toLowerCase().trim();
+        const tableBody = document.querySelector('tbody');
+        const rows = tableBody.querySelectorAll('tr');
+        let visibleCount = 0;
+
+        // Show/hide clear button
+        const clearBtn = document.getElementById('clear-search-btn');
+        if (searchTerm.length > 0) {
+            clearBtn.classList.remove('opacity-0', 'invisible');
+            clearBtn.classList.add('opacity-100', 'visible');
+        } else {
+            clearBtn.classList.remove('opacity-100', 'visible');
+            clearBtn.classList.add('opacity-0', 'invisible');
+        }
+
+        rows.forEach(row => {
+            const rowText = row.textContent.toLowerCase();
+
+            if (searchTerm === '' || rowText.includes(searchTerm)) {
+                row.style.display = 'table-row';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Update results info
+        updateSearchResults(searchTerm, visibleCount, rows.length);
+    }
+
+    // Function to update search results info
+    function updateSearchResults(searchTerm, visibleCount, totalCount) {
+        const resultsInfo = document.getElementById('search-results-info');
+        const resultsCount = document.getElementById('results-count');
+
+        if (searchTerm.length > 0) {
+            resultsCount.textContent = visibleCount;
+            resultsInfo.classList.remove('hidden');
+        } else {
+            resultsInfo.classList.add('hidden');
+        }
+    }
+
+    // Function to clear search
+    function clearSearch() {
+        document.getElementById('realtime-search').value = '';
+        document.getElementById('clear-search-btn').classList.remove('opacity-100', 'visible');
+        document.getElementById('clear-search-btn').classList.add('opacity-0', 'invisible');
+        document.getElementById('search-results-info').classList.add('hidden');
+
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            row.style.display = 'table-row';
+        });
+
+        // Trigger search to update UI
+        performSearch();
+    }
+
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Admin status page loaded with pure JavaScript AJAX functionality');
+
+        const searchInput = document.getElementById('realtime-search');
+        const clearBtn = document.getElementById('clear-search-btn');
+        const clearLink = document.getElementById('clear-search');
+
+        // Real-time search event listeners
+        if (searchInput) {
+            searchInput.addEventListener('input', performSearch);
+        }
+
+        // Clear search button
+        if (clearBtn) {
+            clearBtn.addEventListener('click', clearSearch);
+        }
+
+        // Clear search link in results info
+        if (clearLink) {
+            clearLink.addEventListener('click', clearSearch);
+        }
+    });
+</script>
 @endsection

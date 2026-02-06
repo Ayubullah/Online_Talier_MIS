@@ -27,7 +27,7 @@ class SearchController extends Controller
         $phoneNumber = $request->input('phone_number');
         
         if (empty($phoneNumber)) {
-            return redirect()->route('search.index')->with('error', 'Please enter a phone number to search');
+            return redirect()->route('search.index')->with('error', __('Please enter a phone number to search'));
         }
 
         try {
@@ -37,14 +37,14 @@ class SearchController extends Controller
             })->get();
 
             if ($customers->isEmpty()) {
-                return redirect()->route('search.index')->with('error', 'No customers found with phone number: ' . $phoneNumber);
+                return redirect()->route('search.index')->with('error', __('No customers found with phone number: :phone', ['phone' => $phoneNumber]));
             }
 
             // Redirect directly to the show page with the phone number
             return redirect()->route('search.show', $phoneNumber);
 
         } catch (\Exception $e) {
-            return redirect()->route('search.index')->with('error', 'Error searching customers: ' . $e->getMessage());
+            return redirect()->route('search.index')->with('error', __('Error searching customers: :error', ['error' => $e->getMessage()]));
         }
     }
 
@@ -66,7 +66,7 @@ class SearchController extends Controller
         ->get();
 
         if ($customers->isEmpty()) {
-            return redirect()->route('search.index')->with('error', 'No customers found with phone number: ' . $phoneNumber);
+            return redirect()->route('search.index')->with('error', __('No customers found with phone number: :phone', ['phone' => $phoneNumber]));
         }
 
         // Calculate combined financial summary for all customers
@@ -289,7 +289,7 @@ class SearchController extends Controller
             if (!$measurement) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Cloth measurement not found'
+                    'message' => __('Cloth measurement not found')
                 ], 404);
             }
 
@@ -303,7 +303,7 @@ class SearchController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error fetching cloth measurement details: ' . $e->getMessage()
+                'message' => __('Error fetching cloth measurement details: :error', ['error' => $e->getMessage()])
             ], 500);
         }
     }
@@ -319,7 +319,7 @@ class SearchController extends Controller
             if (!$measurement) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Vest measurement not found'
+                    'message' => __('Vest measurement not found')
                 ], 404);
             }
 
@@ -333,7 +333,7 @@ class SearchController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error fetching vest measurement details: ' . $e->getMessage()
+                'message' => __('Error fetching vest measurement details: :error', ['error' => $e->getMessage()])
             ], 500);
         }
     }
@@ -352,7 +352,7 @@ class SearchController extends Controller
         $selected_ids = $request->input('cloth_ids', []);
 
         if (empty($selected_ids)) {
-            return redirect()->back()->with('error', 'No cloth orders selected.');
+            return redirect()->back()->with('error', __('No cloth orders selected.'));
         }
 
         // Use Eloquent models to get the selected cloth data with relationships
@@ -363,7 +363,7 @@ class SearchController extends Controller
         // Pass the selected data to the view
         return view('search.Cloth_create', [
             'selectedData' => $selectedData,
-            'success' => count($selectedData) . ' cloth orders selected successfully.'
+            'success' => __(':count cloth orders selected successfully.', ['count' => count($selectedData)])
         ]);
     }
     
@@ -377,7 +377,7 @@ class SearchController extends Controller
         $selected_ids = $request->input('vest_ids', []);
 
         if (empty($selected_ids)) {
-            return redirect()->back()->with('error', 'No vest orders selected.');
+            return redirect()->back()->with('error', __('No vest orders selected.'));
         }
 
         // Use Eloquent models to get the selected vest data with relationships
@@ -388,7 +388,7 @@ class SearchController extends Controller
         // Pass the selected data to the view (same as cloth method)
         return view('search.Vest_create', [
             'selectedData' => $selectedData,
-            'success' => count($selectedData) . ' vest orders selected successfully.'
+            'success' => __(':count vest orders selected successfully.', ['count' => count($selectedData)])
         ]);
     }
     

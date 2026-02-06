@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Vest Orders')
+@section('title', __('Vest Orders'))
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-orange-50 py-8 px-4">
@@ -16,6 +16,12 @@
                 </div>
                 
                 <div class="flex items-center gap-4">
+                    <a href="{{ route('vest-assignments.index') }}" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        {{ __('Vest Assignments') }}
+                    </a>
                     <a href="{{ route('vests.create') }}" class="px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold rounded-xl hover:from-orange-700 hover:to-red-700 transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -114,7 +120,7 @@
                 <h2 class="text-xl font-semibold text-gray-900">{{ __('Vest Orders List') }}</h2>
                 <div class="mt-4 md:mt-0 flex items-center space-x-3">
                     <div class="relative">
-                        <input type="text" placeholder="{{ __('Search orders...') }}" 
+                        <input type="text" id="realtime-search" placeholder="{{ __('Search orders...') }}"
                                class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +128,7 @@
                             </svg>
                         </div>
                     </div>
-                    <select class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                    <select id="status-filter" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
                         <option value="">{{ __('All Status') }}</option>
                         <option value="pending">{{ __('Pending') }}</option>
                         <option value="complete">{{ __('Complete') }}</option>
@@ -155,7 +161,7 @@
                                     </div>
                                 </div>
                                 <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Order #{{ $measurement->vm_id }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ __('Order') }} #{{ $measurement->vm_id }}</div>
                                     <div class="text-sm text-gray-500">{{ $measurement->created_at->format('M d, Y') }}</div>
                                 </div>
                             </div>
@@ -175,7 +181,7 @@
                             ${{ number_format($measurement->vest_rate, 2) }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
+                            <span class="status-badge inline-flex px-2 py-1 text-xs font-semibold rounded-full
                                 @if($measurement->Status == 'complete') bg-green-100 text-green-800
                                 @else bg-yellow-100 text-yellow-800 @endif">
                                 {{ ucfirst($measurement->Status ?? 'pending') }}
@@ -186,7 +192,7 @@
                                 @foreach($measurement->clothAssignments as $assignment)
                                     <div class="flex items-center">
                                         <div class="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                                        {{ $assignment->employee->emp_name ?? 'Unknown' }}
+                                        {{ $assignment->employee->emp_name ?? __('Unknown') }}
                                     </div>
                                 @endforeach
                             @else
@@ -217,7 +223,7 @@
                                     <!-- Tooltip -->
                                     <div class="absolute bottom-full mb-2 hidden group-hover:block">
                                         <div class="bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
-                                            Print Size
+                                            {{ __('Print Size') }}
                                             <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
                                         </div>
                                     </div>
@@ -268,21 +274,113 @@
 
 @section('scripts')
 <script>
-    // Search functionality
+    // Real-time filtering functionality using pure JavaScript
+    function performFiltering() {
+        const searchInput = document.getElementById('realtime-search');
+        const statusSelect = document.getElementById('status-filter');
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const statusFilter = statusSelect.value;
+
+        const tableBody = document.querySelector('tbody');
+        const rows = tableBody.querySelectorAll('tr');
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            // Skip empty state row
+            if (row.querySelector('td[colspan]')) {
+                return;
+            }
+
+            const rowText = row.textContent.toLowerCase();
+            const statusBadge = row.querySelector('.status-badge');
+            const currentStatus = statusBadge ? statusBadge.textContent.toLowerCase().trim() : '';
+
+            let showRow = true;
+
+            // Text search filter
+            if (searchTerm !== '' && !rowText.includes(searchTerm)) {
+                showRow = false;
+            }
+
+            // Status filter
+            if (statusFilter !== '' && currentStatus !== statusFilter.toLowerCase()) {
+                showRow = false;
+            }
+
+            if (showRow) {
+                row.style.display = 'table-row';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Update results info
+        updateSearchResults(searchTerm, statusFilter, visibleCount, rows.length);
+    }
+
+    // Function to update search results info
+    function updateSearchResults(searchTerm, statusFilter, visibleCount, totalCount) {
+        // You can add a results info section if needed
+        // Filtered results logged
+    }
+
+    // Function to show messages
+    function showMessage(type, message) {
+        // Remove any existing messages
+        const existingMessages = document.querySelectorAll('.message-alert');
+        existingMessages.forEach(msg => msg.remove());
+
+        // Create message element
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message-alert fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 ${
+            type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+        }`;
+
+        const iconPath = type === 'success'
+            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>'
+            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+
+        messageDiv.innerHTML = `
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    ${iconPath}
+                </svg>
+                <span>${message}</span>
+            </div>
+        `;
+
+        // Add to page
+        document.body.appendChild(messageDiv);
+
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.style.opacity = '0';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }
+        }, 3000);
+    }
+
+    // Initialize when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.querySelector('input[placeholder*="Search"]');
-        const statusSelect = document.querySelector('select');
-        
+        // Vest orders page loaded with real-time filtering
+
+        const searchInput = document.getElementById('realtime-search');
+        const statusSelect = document.getElementById('status-filter');
+
+        // Real-time search event listeners
         if (searchInput) {
-            searchInput.addEventListener('input', function() {
-                console.log('Searching for:', this.value);
-            });
+            searchInput.addEventListener('input', performFiltering);
         }
-        
+
+        // Status filter event listener
         if (statusSelect) {
-            statusSelect.addEventListener('change', function() {
-                console.log('Filtering by status:', this.value);
-            });
+            statusSelect.addEventListener('change', performFiltering);
         }
     });
 </script>

@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Edit Vest Order')
+@section('title', __('Edit Vest Order'))
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-orange-50 py-8 px-4">
@@ -12,7 +12,7 @@
                     <h1 class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2">
                         {{ __('Edit Vest Order') }}
                     </h1>
-                    <p class="text-gray-600 text-lg">{{ __('Customer: ') . $vest->customer->cus_name }}</p>
+                    <p class="text-gray-600 text-lg">{{ __('Customer') }}: {{ $vest->customer->cus_name }}</p>
                 </div>
                 
                 <div class="flex items-center gap-4">
@@ -143,13 +143,13 @@
                         <!-- Add Measurement Button -->
                         <div class="flex items-center gap-4">
                             <div class="text-sm text-white">
-                                Total Measurements: <span id="measurement-count" class="font-semibold bg-white/20 px-2 py-1 rounded">1</span>
+                                {{ __('Total Measurements') }}: <span id="measurement-count" class="font-semibold bg-white/20 px-2 py-1 rounded">1</span>
                             </div>
                             <button type="button" id="add-measurement" class="px-4 py-2 bg-white text-orange-600 rounded-lg hover:bg-orange-50 transition-all duration-200 flex items-center gap-2 font-semibold shadow-lg hover:scale-105 active:scale-95">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                 </svg>
-                                <span>Add Measurement</span>
+                                <span>{{ __('Add Measurement') }}</span>
                             </button>
                         </div>
                     </div>
